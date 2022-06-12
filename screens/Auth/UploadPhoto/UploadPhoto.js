@@ -3,15 +3,15 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import FormButton from '../../../components/FormButton/FormButton';
-import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700 } from '../../../utils/Styles';
+import {windowWidth, bgColor, pFont500, color2 } from '../../../utils/Styles';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 
 const UploadPhoto = ({navigation}) => {
   
   const [image, setImage] = useState();
-  const [errorMsg, setErrorMsg] = useState();
-
+  const [imageUploading, setImageUploading] = useState(false);
+  const [uploadPercentage, setUploadPercentage] = useState(0);
 
 
   const uploadImage = () => {
@@ -30,9 +30,35 @@ const UploadPhoto = ({navigation}) => {
   }
 
   const onSubmitPress = async () => {
-    console.log(image);
-    let filename = image.split('/').pop();
-    const reference = storage().ref(filename);
+    if(image !== undefined){
+
+
+      let filename = image.split('/').pop();
+      
+      const storageRef = storage().ref(filename);
+      
+      setImageUploading(true);
+
+      const task = storageRef.putFile(image);
+
+      task.on('state_changed', taskSnapshot => {
+        setUploadPercentage(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100);
+      });
+      
+      //when the image is uploaded
+      task.then(() => {
+        storageRef.getDownloadURL()
+        .then(response => {
+          console.log(response)
+          setImageUploading(false);
+        })  
+      });
+
+    }
+    else{
+
+    }
+    
   }
 
   return (
@@ -40,16 +66,8 @@ const UploadPhoto = ({navigation}) => {
     <View style = {styles.container}>
       <View style = {styles.content}>
         
-        {/* <View style = {styles.logoContainer}>
-          <Image
-            style={styles.logoImage}
-            source={require('../../../assets/images/logo2.png')}
-          />
-        </View> */}
-
-
         <TouchableOpacity style = {styles.logoContainer} onPress = {uploadImage}>
-          {image !== undefined ? (
+          {image !== undefined ? (  
             <Image
               style={styles.logoImage}
               source={{uri: image}}
@@ -63,13 +81,24 @@ const UploadPhoto = ({navigation}) => {
           
         </TouchableOpacity>
 
-        <View style = {styles.buttonsContainer}>
-          <View style = {styles.buttonContainer}>
-            <FormButton title = 'Upload' icon="login" mode="contained" onPress={onSubmitPress} />
+        {imageUploading ? (
+          <View style = {styles.imageUploading}>
+            <Image
+              style={styles.loadingImage}
+              source={require('../../../assets/images/rolling_color1.gif')}
+            />
+            <View>
+                <Text style={styles.uploadText}>{uploadPercentage}</Text>
+            </View>
           </View>
-        </View>
-
-        <Text style= {styles.errorMsg}>{errorMsg}</Text> 
+        ):(
+          <View style = {styles.buttonsContainer}>
+            <View style = {styles.buttonContainer}>
+              <FormButton title = 'Submit' icon="login" mode="contained" onPress={onSubmitPress} />
+            </View>
+          </View>
+        )}
+        
 
       </View>
     </View>
@@ -107,12 +136,6 @@ const styles = StyleSheet.create({
     margin: 4
   },
 
-  errorMsg: {
-    color: 'red',
-    fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
-  },
 
   logoContainer: {
     flexDirection: 'row',
@@ -123,6 +146,23 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 70 * windowWidth / 100,
     height: 70 * windowWidth / 100,
+  },
+
+  loadingImage: {
+    width: 70,
+    height: 70 
+  },
+
+  imageUploading: {
+    alignItems: 'center',
+    marginTop: 16,
+  },
+
+  uploadText: {
+    fontSize: pFont500,
+    color: color2,
+    marginTop: 8,
+    fontSize: 18,
   }
 
 });

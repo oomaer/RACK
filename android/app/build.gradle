@@ -261,6 +261,16 @@ android {
 }
 
 dependencies {
+    implementation('com.facebook.fresco:fresco:2.6.0') {
+      exclude group: 'com.facebook.soloader', module: 'soloader'
+      exclude group: 'com.facebook.fresco', module: 'soloader'
+      exclude group: 'com.facebook.fresco', module: 'nativeimagefilters'
+      exclude group: 'com.facebook.fresco', module: 'nativeimagetranscoder'
+      exclude group: 'com.facebook.fresco', module: 'memory-type-native'
+      exclude group: 'com.facebook.fresco', module: 'imagepipeline-native'
+    }
+    implementation 'com.facebook.fresco:animated-gif:2.6.0'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion
