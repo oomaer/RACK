@@ -23,7 +23,7 @@ const AppStack = () => {
             </View>
         )
     }
-    if(userData.imageUrl == null){
+    if(userData && userData.imageUrl == null){
         return (
             <UploadPhoto />
         )
