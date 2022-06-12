@@ -12,15 +12,14 @@ const Login = ({navigation}) => {
   
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [errorMsg, setErrorMsg] = useState();
- 
+  const {login, errorMsg, setErrorMsg} = useContext(AuthContext);
 
   const handleLogin = () => {
 
     setEmail('')
     setPassword('')
     setErrorMsg('')
-    navigation.navigate('Home');
+    login({email, password});
   }
 
 

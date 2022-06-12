@@ -8,6 +8,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import UserContext from '../../../context/UserContext/UserContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
 
 
 const UploadPhoto = ({}) => {
@@ -86,10 +87,7 @@ const UploadPhoto = ({}) => {
 
         {imageUploading ? (
           <View style = {styles.imageUploading}>
-            <Image
-              style={styles.loadingImage}
-              source={require('../../../assets/images/rolling_color1.gif')}
-            />
+            <LoadingSpinner />
             <View>
                 <Text style={styles.uploadText}>Uploading {uploadPercentage} %</Text>
             </View>
@@ -151,10 +149,6 @@ const styles = StyleSheet.create({
     height: 70 * windowWidth / 100,
   },
 
-  loadingImage: {
-    width: 70,
-    height: 70 
-  },
 
   imageUploading: {
     alignItems: 'center',

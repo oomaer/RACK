@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import auth from '@react-native-firebase/auth';
 import AuthContext from "./AuthContext";
 import firestore from '@react-native-firebase/firestore';
-import { defaultImageURL } from "../../utils/utils";
+
 
 
 function AuthContextProvider({children}) {
@@ -44,8 +44,10 @@ function AuthContextProvider({children}) {
     const login = async (user) => {
         try{
             await auth().signInWithEmailAndPassword(user.email, user.password);
+            setErrorMsg('');
         }
         catch(err){
+            setErrorMsg(err.message.split(']')[1]);
             console.log(err);
         }
     }
