@@ -1,13 +1,12 @@
 
 
-import React, { useContext, useEffect, useState } from 'react';
-import {Text} from 'react-native';
+import React, { useContext } from 'react';
+import {StyleSheet, View} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../screens/Home/Home';
 import UserContext from '../context/UserContext/UserContext';
-import firestore from '@react-native-firebase/firestore';
 import UploadPhoto from '../screens/Auth/UploadPhoto/UploadPhoto';
-import AuthContext from '../context/AuthContext/AuthContext';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +16,11 @@ const AppStack = () => {
     const {userData, userDataLoading} = useContext(UserContext);
 
     if(userDataLoading){
-        return <Text>Loading</Text>
+        return (
+            <View style = {styles.loadingContainer}>
+                <LoadingSpinner />
+            </View>
+        )
     }
     if(userData.imageUrl == null){
         return (
@@ -35,3 +38,11 @@ const AppStack = () => {
 }
 
 export default AppStack;
+
+const styles = StyleSheet.create({
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
