@@ -12,7 +12,6 @@ const UploadPhoto = ({navigation}) => {
   const [image, setImage] = useState();
   const [errorMsg, setErrorMsg] = useState();
 
- 
 
 
   const uploadImage = () => {
