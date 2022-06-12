@@ -6,16 +6,19 @@ import FormButton from '../../../components/FormButton/FormButton';
 import {windowWidth, bgColor, pFont500, color2 } from '../../../utils/Styles';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
+import firestore from '@react-native-firebase/firestore';
 
-const UploadPhoto = ({navigation}) => {
+const UploadPhoto = ({route, navigation}) => {
   
+  const {name, email, password} = route.params;
+  console.log(name, email, password)
+
   const [image, setImage] = useState();
   const [imageUploading, setImageUploading] = useState(false);
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
 
   const uploadImage = () => {
-    console.log('here');
     ImagePicker.openPicker({
       width: 400,
       height: 400,
@@ -31,7 +34,6 @@ const UploadPhoto = ({navigation}) => {
 
   const onSubmitPress = async () => {
     if(image !== undefined){
-
 
       let filename = image.split('/').pop();
       
@@ -54,10 +56,13 @@ const UploadPhoto = ({navigation}) => {
         })  
       });
 
+      
     }
     else{
 
     }
+
+    
     
   }
 

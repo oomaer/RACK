@@ -7,15 +7,18 @@
  */
 
 import React from 'react';
-
-
 import Navigation from './navigation';
+import { Provider } from 'react-redux';
 
+import configureStore from './redux/Store/store';
   
+const store = configureStore();
 
 const App = () => {
   return (
-    <Navigation />
+    <Provider store = {store}>
+      <Navigation />
+    </Provider>
   );
 };
 

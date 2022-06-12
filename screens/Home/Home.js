@@ -13,7 +13,7 @@ const Home = ({navigation}) => {
   return (
 
     <View style = {styles.container}>
-        <Text style = {styles.errorMsg}>HEllo this is home</Text>
+        <Text style = {styles.errorMsg}>Hello this is home</Text>
         <Button title = 'logout' onPress = {() => logout()} />
     </View>
 

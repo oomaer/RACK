@@ -1,6 +1,7 @@
 
 
 import React, {useState, useContext} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, Image} from 'react-native';
 import FormButton from '../../../components/FormButton/FormButton';
 import FormInput from '../../../components/FormInput/FormInput';
@@ -10,12 +11,13 @@ import AuthContext from '../../../context/AuthContext/AuthContext';
 
 const Register = ({navigation}) => {
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');  
-  const {register} = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const name = useSelector(state => state.user.name);
+  const email = useSelector(state => state.user.email);
+  const password = useSelector(state => state.user.password);
+  
 
+  const [errorMsg, setErrorMsg] = useState('');  
 
   const handleSignUp = () => {
     if(name === ''){
@@ -29,14 +31,26 @@ const Register = ({navigation}) => {
     }
   
     else{
-      setName('');
-      setErrorMsg('');
-      setEmail('');
-      setPassword('');    
-      register({email, password});
+         
+      navigation.navigate('UploadPhoto', {name, email, password});
   
     }
 
+  }
+
+
+  const onNameChange = (text) => {
+    dispatch({type: "CHANGE_NAME", payload: text})
+  }
+
+  const onEmailChange = (text) => {
+    dispatch({type: "CHANGE_EMAIL", payload: text})
+    
+  }
+
+  const onPasswordChange = (text) => {
+    dispatch({type: "CHANGE_PASSWORD", payload: text})
+    
   }
 
   return (
@@ -59,17 +73,17 @@ const Register = ({navigation}) => {
       
         <View style = {styles.inputContainer}>
           <Text style = {styles.label}>Name: </Text>
-          <FormInput onChangeText = {setName} value = {name} placeholder = 'Enter Name' />  
+          <FormInput onChangeText = {onNameChange} value = {name} placeholder = 'Enter Name' />  
         </View>
 
         <View style = {styles.inputContainer}>
           <Text style = {styles.label}>Email: </Text>
-          <FormInput onChangeText = {setEmail} value = {email} placeholder = 'Enter Email'/>  
+          <FormInput onChangeText = {onEmailChange} value = {email} placeholder = 'Enter Email'/>  
         </View>
 
         <View style = {styles.inputContainer}>
           <Text style = {styles.label}>Password: </Text>
-          <FormInput onChangeText = {setPassword} value = {password} secureTextEntry placeholder = 'Enter Password' />  
+          <FormInput onChangeText = {onPasswordChange} value = {password} secureTextEntry placeholder = 'Enter Password' />  
         </View>
 
         <View style = {styles.buttonsContainer}>

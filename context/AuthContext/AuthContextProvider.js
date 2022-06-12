@@ -10,13 +10,11 @@ function AuthContextProvider({children}) {
 
 
     const register = async (user) => {
-        try{
-            await auth().createUserWithEmailAndPassword(user.email, user.password);
-        }
-        catch(err){
-            console.log(err);
-        }
-        
+        auth().createUserWithEmailAndPassword(user.email, user.password)
+        .then(response => {
+            console.log(response);    
+        })
+        .catch(err => console.log(err));
     }
 
     const login = async (user) => {
