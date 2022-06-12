@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { TextInput, StyleSheet } from "react-native";
-import { color2 } from '../../utils/Styles';
+import { color2 } from '../../utils/utils';
 
 const FormInput = ({value, placeholder, ...rest}) => {
     return(

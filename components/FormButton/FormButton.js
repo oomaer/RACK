@@ -1,10 +1,11 @@
 
 import React from 'react';
 import {StyleSheet, Text, } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { pFont600 } from '../../utils/Styles';
+import { TouchableOpacity } from 'react-native';
+import { pFont600 } from '../../utils/utils';
 
 const FormButton = ({title, onPress, ...rest}) => {
+    
     return (
         <TouchableOpacity style={styles.button} onPress = {onPress} >
             <Text style={styles.buttonText}>{title}</Text>

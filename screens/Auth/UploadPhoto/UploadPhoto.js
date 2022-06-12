@@ -1,22 +1,22 @@
 
 
-import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button} from 'react-native';
 import FormButton from '../../../components/FormButton/FormButton';
-import {windowWidth, bgColor, pFont500, color2 } from '../../../utils/Styles';
+import {windowWidth, bgColor, pFont500, color2, defaultImageURL } from '../../../utils/utils';
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
-import firestore from '@react-native-firebase/firestore';
+import UserContext from '../../../context/UserContext/UserContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const UploadPhoto = ({route, navigation}) => {
+
+const UploadPhoto = ({}) => {
   
-  const {name, email, password} = route.params;
-  console.log(name, email, password)
+  const {updateUserImage} = useContext(UserContext);
 
   const [image, setImage] = useState();
   const [imageUploading, setImageUploading] = useState(false);
   const [uploadPercentage, setUploadPercentage] = useState(0);
-
 
   const uploadImage = () => {
     ImagePicker.openPicker({
@@ -32,17 +32,16 @@ const UploadPhoto = ({route, navigation}) => {
     });
   }
 
-  const onSubmitPress = async () => {
+
+  const onSubmitPress = () => {
+    
     if(image !== undefined){
 
       let filename = image.split('/').pop();
-      
       const storageRef = storage().ref(filename);
-      
       setImageUploading(true);
 
       const task = storageRef.putFile(image);
-
       task.on('state_changed', taskSnapshot => {
         setUploadPercentage(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100);
       });
@@ -51,7 +50,7 @@ const UploadPhoto = ({route, navigation}) => {
       task.then(() => {
         storageRef.getDownloadURL()
         .then(response => {
-          console.log(response)
+          updateUserImage(response);
           setImageUploading(false);
         })  
       });
@@ -59,11 +58,10 @@ const UploadPhoto = ({route, navigation}) => {
       
     }
     else{
-
+      updateUserImage(defaultImageURL);
     }
 
-    
-    
+
   }
 
   return (
@@ -93,13 +91,13 @@ const UploadPhoto = ({route, navigation}) => {
               source={require('../../../assets/images/rolling_color1.gif')}
             />
             <View>
-                <Text style={styles.uploadText}>{uploadPercentage}</Text>
+                <Text style={styles.uploadText}>Uploading {uploadPercentage} %</Text>
             </View>
           </View>
         ):(
           <View style = {styles.buttonsContainer}>
             <View style = {styles.buttonContainer}>
-              <FormButton title = 'Submit' icon="login" mode="contained" onPress={onSubmitPress} />
+              <FormButton title = 'Submit' onPress={onSubmitPress} />
             </View>
           </View>
         )}

@@ -6,8 +6,8 @@ import Routes from './Routes';
 const Navigation = () => {
 
   return (
-    <AuthContextProvider>
-      <Routes />
+    <AuthContextProvider>   
+        <Routes />
     </AuthContextProvider>
   );
 }

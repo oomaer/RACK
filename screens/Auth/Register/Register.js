@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, Image} from 'react-native';
 import FormButton from '../../../components/FormButton/FormButton';
 import FormInput from '../../../components/FormInput/FormInput';
-import {windowWidth, bgColor, color3, pFont500 } from '../../../utils/Styles';
+import {windowWidth, bgColor, color3, pFont500 } from '../../../utils/utils';
 import NavigationButton from '../../../components/NavigationButton/NavigationButton';
 import AuthContext from '../../../context/AuthContext/AuthContext';
 
@@ -16,8 +16,8 @@ const Register = ({navigation}) => {
   const email = useSelector(state => state.user.email);
   const password = useSelector(state => state.user.password);
   
-
-  const [errorMsg, setErrorMsg] = useState('');  
+  const {register, errorMsg, setErrorMsg} = useContext(AuthContext);
+   
 
   const handleSignUp = () => {
     if(name === ''){
@@ -31,9 +31,9 @@ const Register = ({navigation}) => {
     }
   
     else{
-         
-      navigation.navigate('UploadPhoto', {name, email, password});
-  
+      
+      register({name, email, password})
+
     }
 
   }

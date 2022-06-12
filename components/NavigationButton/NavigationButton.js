@@ -2,7 +2,7 @@
 import React from 'react';
 import {StyleSheet, Text, } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { colorPrimary, pFont500, color3 } from '../../utils/Styles';
+import { colorPrimary, pFont500, color3 } from '../../utils/utils';
 
 const NavigationButton = ({title, onPress, active}) => {
     return (

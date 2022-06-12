@@ -1,17 +1,19 @@
 
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { View, Text, StyleSheet, Image} from 'react-native';
 import FormInput from '../../../components/FormInput/FormInput';
 import FormButton from '../../../components/FormButton/FormButton';
-import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700 } from '../../../utils/Styles';
+import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700 } from '../../../utils/utils';
 import NavigationButton from '../../../components/NavigationButton/NavigationButton';
+import AuthContext from '../../../context/AuthContext/AuthContext';
 
 const Login = ({navigation}) => {
   
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorMsg, setErrorMsg] = useState();
+ 
 
   const handleLogin = () => {
 

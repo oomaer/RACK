@@ -3,12 +3,14 @@
 import React, {useContext, useState} from 'react';
 import { View, Text, StyleSheet, Button} from 'react-native';
 import AuthContext from '../../context/AuthContext/AuthContext';
-import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700 } from '../../utils/Styles';
+import UserContext from '../../context/UserContext/UserContext';
+import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700 } from '../../utils/utils';
 
 const Home = ({navigation}) => {
   
   const {user, logout} = useContext(AuthContext);
-  console.log(user);
+  const {userData} = useContext(UserContext);
+  // console.log(userData)
 
   return (
 

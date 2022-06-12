@@ -1,21 +1,45 @@
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import auth from '@react-native-firebase/auth';
 import AuthContext from "./AuthContext";
+import firestore from '@react-native-firebase/firestore';
+import { defaultImageURL } from "../../utils/utils";
 
 
 function AuthContextProvider({children}) {
   
     const [user, setUser] = useState(null);
+    const [errorMsg, setErrorMsg] = useState('');
 
+    const createNewUser = async (user) => {
+        firestore()
+        .collection('Users')
+        .doc(user.id)
+        .set({
+            name: user.name,
+            email: user.email,
+            imageUrl: null,
+        })
+        .then((response) => {
+            console.log(response);
+            console.log('User added!');
+        })
+        .catch(err => console.log(err));
+    }
 
     const register = async (user) => {
         auth().createUserWithEmailAndPassword(user.email, user.password)
         .then(response => {
-            console.log(response);    
+            setErrorMsg('');
+            AsyncStorage.setItem('firstTime', 'true');
+            createNewUser({...user, id: response.user.uid})
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            setErrorMsg(err.message.split(']')[1]);
+        })
+
     }
+
 
     const login = async (user) => {
         try{
@@ -43,6 +67,8 @@ function AuthContextProvider({children}) {
                 register,
                 login,
                 logout,
+                errorMsg,
+                setErrorMsg,
             }}
         >
             {children}
