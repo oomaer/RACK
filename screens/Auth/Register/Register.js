@@ -55,12 +55,22 @@ const Register = ({navigation}) => {
 
   return (
     <View style = {styles.container}>
+
+        <Image
+          style={styles.bgImageTop}
+          source={require('../../../assets/images/bgImages/bg_top.png')}
+        />
+        <Image
+          style={styles.bgImageBottom}
+          source={require('../../../assets/images/bgImages/bg_bottom.png')}
+        />
+
       <View style = {styles.content}>
         
         <View style = {styles.logoContainer}>
           <Image
             style={styles.logoImage}
-            source={require('../../../assets/images/logo2.png')}
+            source={require('../../../assets/images/logos/logoNew2.jpg')}
           />
         </View>
 
@@ -109,10 +119,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: bgColor,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   content: {
-    flex: 1,
-    width: 80 * windowWidth / 100,
+    justifyContent: 'center',
+    width: 90 * windowWidth / 100,
+    padding: 6 * windowWidth / 100,
+    backgroundColor: 'white',
+    elevation: 5,
+    borderRadius: 8,
   },  
   navigate: {
     flexDirection: 'row',
@@ -163,6 +178,21 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 70 * windowWidth / 100,
     height: 70 * windowWidth / 100,
+  },
+
+  bgImageTop: {
+    position:"absolute",
+    width: windowWidth,
+    height: 200,
+    zIndex: 0,
+    top: 0,
+  },
+  bgImageBottom: {
+    position:"absolute",
+    width: windowWidth,
+    height: 200,
+    zIndex: 0,
+    bottom: -50,
   }
 
 });

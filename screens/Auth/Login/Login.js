@@ -4,7 +4,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import { View, Text, StyleSheet, Image} from 'react-native';
 import FormInput from '../../../components/FormInput/FormInput';
 import FormButton from '../../../components/FormButton/FormButton';
-import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700 } from '../../../utils/utils';
+import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700, windowHeight, colorPrimary } from '../../../utils/utils';
 import NavigationButton from '../../../components/NavigationButton/NavigationButton';
 import AuthContext from '../../../context/AuthContext/AuthContext';
 
@@ -26,42 +26,53 @@ const Login = ({navigation}) => {
   return (
 
     <View style = {styles.container}>
-      <View style = {styles.content}>
-        
-        <View style = {styles.logoContainer}>
-          <Image
-            style={styles.logoImage}
-            source={require('../../../assets/images/logo2.png')}
-          />
-        </View>
 
-        <View style = {styles.navigate}>
-          <NavigationButton title='Login' onPress = {() => {}} active = {true}/>
-          <Text style = {styles.slash}> / </Text>
-          <NavigationButton title='Sign Up' onPress = {() => {navigation.navigate('SignUp')}} active = {false}/>
-        </View>
+        <Image
+          style={styles.bgImageTop}
+          source={require('../../../assets/images/bgImages/bg_top.png')}
+        />
+        <Image
+          style={styles.bgImageBottom}
+          source={require('../../../assets/images/bgImages/bg_bottom.png')}
+        />
 
-        <View style = {styles.inputContainer}>
-          <Text style = {styles.label}>Email: </Text>
-          <FormInput value = {email} placeholder = 'Enter Email' onChangeText = {setEmail} />
-        </View>
-
-        <View style = {styles.inputContainer}>
-          <Text style = {styles.label}>Password: </Text>
-          <FormInput value = {password} placeholder = 'Enter Password' onChangeText = {setPassword} />
-        </View>
-  
-        <View style = {styles.buttonsContainer}>
-          <View style = {styles.buttonContainer}>
-            <FormButton title = 'Login' icon="login" mode="contained" onPress={handleLogin} />
+        <View style = {styles.content}>
+          
+          <View style = {styles.logoContainer}>
+            <Image
+              style={styles.logoImage}
+              source={require('../../../assets/images/logos/logoNew2.jpg')}
+            />
           </View>
-        </View>
+
+          <View style = {styles.navigate}>
+            <NavigationButton title='Login' onPress = {() => {}} active = {true}/>
+            <Text style = {styles.slash}> / </Text>
+            <NavigationButton title='Sign Up' onPress = {() => {navigation.navigate('SignUp')}} active = {false}/>
+          </View>
+
+          <View style = {styles.inputContainer}>
+            <Text style = {styles.label}>Email: </Text>
+            <FormInput value = {email} placeholder = 'Enter Email' onChangeText = {setEmail} />
+          </View>
+
+          <View style = {styles.inputContainer}>
+            <Text style = {styles.label}>Password: </Text>
+            <FormInput value = {password} placeholder = 'Enter Password' onChangeText = {setPassword} />
+          </View>
+    
+          <View style = {styles.buttonsContainer}>
+            <View style = {styles.buttonContainer}>
+              <FormButton title = 'Login' icon="login" mode="contained" onPress={handleLogin} />
+            </View>
+          </View>
 
 
 
-        <Text style= {styles.errorMsg}>{errorMsg}</Text> 
+          <Text style= {styles.errorMsg}>{errorMsg}</Text> 
 
       </View>
+
     </View>
 
   );
@@ -80,8 +91,11 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: 'center',
-    flex: 1,
-    width: 80 * windowWidth / 100,
+    width: 90 * windowWidth / 100,
+    padding: 6 * windowWidth / 100,
+    backgroundColor: 'white',
+    elevation: 5,
+    borderRadius: 8,
   },  
   navigate: {
     flexDirection: 'row',
@@ -128,11 +142,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
 
   logoImage: {
     width: 70 * windowWidth / 100,
     height: 70 * windowWidth / 100,
+  },
+
+  bgImageTop: {
+    position:"absolute",
+    width: windowWidth,
+    height: 200,
+    zIndex: 0,
+    top: 0,
+  },
+  bgImageBottom: {
+    position:"absolute",
+    width: windowWidth,
+    height: 200,
+    zIndex: 0,
+    bottom: -50,
   }
 
 });
+

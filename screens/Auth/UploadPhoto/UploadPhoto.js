@@ -7,9 +7,8 @@ import {windowWidth, bgColor, pFont500, color2, defaultImageURL } from '../../..
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import UserContext from '../../../context/UserContext/UserContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
-
+import NavigationButton from '../../../components/NavigationButton/NavigationButton';
 
 const UploadPhoto = ({}) => {
   
@@ -61,15 +60,30 @@ const UploadPhoto = ({}) => {
     else{
       updateUserImage(defaultImageURL);
     }
+  }
 
-
+  const onSkipPress = () => {
+    updateUserImage(defaultImageURL);
   }
 
   return (
 
     <View style = {styles.container}>
+      
+      <Image
+          style={styles.bgImageTop}
+          source={require('../../../assets/images/bgImages/bg_top.png')}
+        />
+      <Image
+        style={styles.bgImageBottom}
+        source={require('../../../assets/images/bgImages/bg_bottom.png')}
+      />
+
       <View style = {styles.content}>
         
+        <View>
+          <Text style={styles.header}>Set your Profile Photo</Text>
+        </View>
         <TouchableOpacity style = {styles.logoContainer} onPress = {uploadImage}>
           {image !== undefined ? (  
             <Image
@@ -99,9 +113,14 @@ const UploadPhoto = ({}) => {
             </View>
           </View>
         )}
+
+        <View style = {styles.bottomRow}>
+          <NavigationButton title='SKIP' onPress = {onSkipPress} active = {false}/>
+        </View>
         
 
       </View>
+
     </View>
 
   );
@@ -120,11 +139,13 @@ const styles = StyleSheet.create({
   },
   content: {
     justifyContent: 'center',
-    flex: 1,
-    width: 80 * windowWidth / 100,
+    width: 90 * windowWidth / 100,
+    padding: 6 * windowWidth / 100,
+    backgroundColor: 'white',
+    elevation: 5,
+    borderRadius: 8,
   },  
- 
-  
+
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -137,6 +158,13 @@ const styles = StyleSheet.create({
     margin: 4
   },
 
+  header: {
+    fontSize: 20,
+    fontFamily: pFont500,
+    color: color2,
+    marginBottom: 10,
+    textAlign: 'center',
+  },
 
   logoContainer: {
     flexDirection: 'row',
@@ -147,6 +175,7 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 70 * windowWidth / 100,
     height: 70 * windowWidth / 100,
+    backgroundColor: 'white',
   },
 
 
@@ -160,6 +189,27 @@ const styles = StyleSheet.create({
     color: color2,
     marginTop: 8,
     fontSize: 18,
+  },
+
+  bgImageTop: {
+    position:"absolute",
+    width: windowWidth,
+    height: 200,
+    zIndex: 0,
+    top: 0,
+  },
+  bgImageBottom: {
+    position:"absolute",
+    width: windowWidth,
+    height: 200,
+    zIndex: 0,
+    bottom: -50,
+  },
+
+  bottomRow: {
+    alignItems: 'flex-end',
+    marginTop: 15,
+    marginRight: 10,
   }
 
 });
