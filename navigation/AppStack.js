@@ -2,13 +2,19 @@
 
 import React, { useContext } from 'react';
 import {StyleSheet, View} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
-import Home from '../screens/Home/Home';
+
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+
 import UserContext from '../context/UserContext/UserContext';
 import UploadPhoto from '../screens/Auth/UploadPhoto/UploadPhoto';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import Root from './Root';
 
-const Stack = createStackNavigator();
+import EditProfile from '../screens/User/EditProfile/EditProfile';
+
+
+// const Drawer = createDrawerNavigator();
 
 
 const AppStack = () => {
@@ -30,9 +36,14 @@ const AppStack = () => {
     }
     else{
         return (
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
-            </Stack.Navigator>
+            <>
+                <Root />
+                
+                {/* <Drawer.Navigator>
+                    <Drawer.Screen name="EditProfile" component={EditProfile} />
+                </Drawer.Navigator> */}
+
+            </>
         )
     }
     

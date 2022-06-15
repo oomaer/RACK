@@ -5,7 +5,6 @@
  * @format
  * @flow strict-local
  */
-
 import React from 'react';
 import Navigation from './navigation';
 import { Provider } from 'react-redux';

@@ -9,6 +9,8 @@ export const pFont600 = 'Montserrat-SemiBold';
 export const pFont700 = 'Montserrat-Bold';
 export const pFont800 = 'Montserrat-ExtraBold';
 
+export const logoFont = 'cursive';
+
 
 export const bgColor = '#fff';
 export const colorPrimary = '#ac072e';
