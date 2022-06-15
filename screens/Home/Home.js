@@ -1,23 +1,79 @@
 
 
-import React, {useContext, useState} from 'react';
-import { View, Text, StyleSheet, Button} from 'react-native';
-import AuthContext from '../../context/AuthContext/AuthContext';
+import React, {useContext, useEffect} from 'react';
+import { View, Text, StyleSheet, Button, ScrollView, LogBox} from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
+import ActionButtonComponent from '../../components/Home/ActionButtonComponent/ActionButtonComponent';
+// import Carousel from 'react-native-snap-carousel';
+import RecipeCarouselItem from '../../components/Home/RecipeCarouselItem/RecipeCarouselItem';
+import UserCard from '../../components/Home/UserCard/UserCard';
+
 import UserContext from '../../context/UserContext/UserContext';
-import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700 } from '../../utils/utils';
+import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700, color4, colorPrimary, color2 } from '../../utils/utils';
+
+
+
+const data = [
+  {
+    id: 1,
+    text: 'Hello, world!',
+    imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=745&q=80',
+  },
+  {
+    id: 2,
+    text: 'Hello, world!',
+    imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+  }
+]
 
 const Home = ({navigation}) => {
   
-  const {user, logout} = useContext(AuthContext);
-  const {userData} = useContext(UserContext);
-  // console.log(userData)
+
+  const {topUsers} = useContext(UserContext);
+
+
+  useEffect(() => {
+      LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
+  }, [])
+
 
   return (
 
-    <View style = {styles.container}>
-        <Text style = {styles.errorMsg}>Hello this is {userData.name}</Text>
-        <Button title = 'logout' onPress = {() => logout()} />
-    </View>
+    <ScrollView style={{backgroundColor: bgColor}}>
+
+      <View style = {styles.container}>
+
+          <View style = {styles.topUsers}>
+            <ScrollView horizontal = {true} showsHorizontalScrollIndicator = {false}>
+              {topUsers.map((user, index) => {
+                return(
+                  <UserCard key = {index} user = {user["_data"]} />
+                )
+              })}    
+            </ScrollView>            
+          </View>
+
+          <View style = {styles.content}>
+            <Carousel
+                width={400}
+                height={400}
+                data={data}
+                renderItem={({ item }) => <RecipeCarouselItem item = {item}/>}
+                autoPlay={true}
+                autoPlayInterval={1500}
+                mode="parallax"
+                
+            />
+          </View>
+
+          
+          
+      </View>
+      
+
+      <ActionButtonComponent />
+
+    </ScrollView>
 
   );
 }
@@ -28,16 +84,18 @@ export default Home
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: bgColor,
     alignItems: 'center',
-    justifyContent: 'center',
   },
-  content: {
-    justifyContent: 'center',
-    flex: 1,
-    width: 80 * windowWidth / 100,
-  },  
+
+  topUsers: {
+    borderBottomWidth: 1,
+    borderBottomColor: color4,
+    
+    padding: windowWidth * 0.04,
+    height: (windowWidth * 0.18) + (windowWidth * 0.10),
+  },
+  
   navigate: {
     flexDirection: 'row',
     marginBottom: 10,
@@ -88,6 +146,6 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 70 * windowWidth / 100,
     height: 70 * windowWidth / 100,
-  }
+  },
 
 });

@@ -9,6 +9,7 @@ function UserContextProvider({children}) {
   
     const {user} = useContext(AuthContext);
     const [userData, setUserData] = useState({});
+    const [topUsers, setTopUsers] = useState([]);
     const [userDataLoading, setUserDataLoading] = useState(true);
 
     const getUserData = () => {
@@ -22,8 +23,17 @@ function UserContextProvider({children}) {
         .catch(err => console.log(err));
     }
 
+    const getTopUsers = () => {
+        firestore().collection('Users').limit(10).get().
+        then(res => {
+            setTopUsers(res.docs);
+        })
+        .catch(err => console.log(err));
+    }
+
     useEffect(() => {
         getUserData();
+        getTopUsers();
     }, [])
 
 
@@ -43,6 +53,7 @@ function UserContextProvider({children}) {
 
     }
 
+
     return (
         <UserContext.Provider
             value={{
@@ -50,6 +61,7 @@ function UserContextProvider({children}) {
                 setUserData,
                 updateUserImage,
                 userDataLoading,
+                topUsers,
             }}
         >
             {children}

@@ -21,7 +21,6 @@ const AppStack = () => {
 
     const {userData, userDataLoading} = useContext(UserContext);
 
-    console.log(userData);
     if(userDataLoading){
         return (
             <View style = {styles.loadingContainer}>
