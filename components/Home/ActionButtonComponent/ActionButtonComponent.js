@@ -60,10 +60,10 @@ const ActionButtonComponent = () => {
             spacing = {10}
             buttonTextStyle = {{color: 'black', fontSize: 38, fontWeight: '300'}}
         >
-            <ActionButton.Item  buttonColor={color2} spaceBetween={0} title="Gallery" onPress={uploadImage} style = {styles.actionButtonItem}>
+            <ActionButton.Item  buttonColor={color2} spaceBetween={0} onPress={uploadImage} style = {styles.actionButtonItem}>
             <Icon name="images-outline" style={styles.actionButtonIcon} />
             </ActionButton.Item>
-            <ActionButton.Item  buttonColor={color2} spaceBetween={0} title="Camera" onPress={takePhoto} style = {styles.actionButtonItem}>
+            <ActionButton.Item  buttonColor={color2} spaceBetween={0} onPress={takePhoto} style = {styles.actionButtonItem}>
             <Icon name="camera-outline" style={styles.actionButtonIcon} />
             </ActionButton.Item>
         </ActionButton>
