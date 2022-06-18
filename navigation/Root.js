@@ -30,10 +30,10 @@ const HomeStack = () => {
             },
           }}
         >
-            <Stack.Screen name="Profile" component={ProfileScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
             <Stack.Screen name="Home" component={Home} options={{headerTitle: (props) => <HomeHeader {...props} /> }}/>
             <Stack.Screen name="AddPost" component={AddPost} options={{headerShown: false}}/>
             <Stack.Screen name="Likes" component={Likes} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
+            <Stack.Screen name="Profile" component={ProfileScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
             
         </Stack.Navigator>
     )

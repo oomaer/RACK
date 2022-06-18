@@ -96,7 +96,7 @@ const PostCard = ({post, id}) => {
                
                 <View style = {styles.postDescription}>
                     <Text style = {styles.postText}>
-                        <Text style={styles.highlight}>{post.user.name} - </Text>
+                        <Text onPress = {() => navigation.navigate('Profile', {user: post.user})} style={styles.highlight}>{post.user.name} - </Text>
                         {post.post}
                     </Text>
                 </View>

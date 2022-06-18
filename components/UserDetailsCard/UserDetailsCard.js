@@ -1,11 +1,15 @@
 
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
 import { color2, color3, pFont500, primaryFont } from '../../utils/utils';
 
 const UserDetailsCard = ({user}) => {
+
+    const navigation = useNavigation();
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress = {() => navigation.navigate('Profile', {user})}>
 
             <View style = {styles.imageContainer}>
                 <Image
