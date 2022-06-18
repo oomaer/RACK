@@ -33,8 +33,6 @@ const Home = ({navigation}) => {
   const {topUsers} = useContext(UserContext);
   const {wallPosts} = useContext(PostContext);
 
-  console.log(wallPosts)
-
   useEffect(() => {
       LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
   }, [])
@@ -74,7 +72,7 @@ const Home = ({navigation}) => {
           <View style = {styles.posts}>
             {wallPosts.map((post, index) => {
               return(
-                <PostCard key = {index} post = {post["_data"]} />
+                <PostCard key = {index} post = {post["_data"]} id = {post.id}/>
               )
             })}
           </View>

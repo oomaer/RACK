@@ -13,7 +13,7 @@ export const logoFont = 'LobsterTwo-BoldItalic';
 
 
 export const bgColor = '#fff';
-export const colorPrimary = '#DB1B48';
+export const colorPrimary = '#ac072e';
 export const color2 = 'black';
 export const color3 = '#919191';
 export const color4 = '#bac2c0';

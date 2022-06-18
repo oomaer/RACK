@@ -3,7 +3,7 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
 import { color2, color3, pFont500, primaryFont } from '../../utils/utils';
 
-const UserDetailsCard = ({user, location}) => {
+const UserDetailsCard = ({user}) => {
     return (
         <TouchableOpacity style={styles.container}>
 
@@ -15,11 +15,8 @@ const UserDetailsCard = ({user, location}) => {
             </View>
             <View style = {styles.userDetails}>
                 <Text style = {styles.name}>{user.name}</Text>
-                {location ? (
-                    <Text style = {styles.text}>{location}</Text>
-                ):(null
-                    // <Text style = {styles.text}>No location</Text>
-                )}
+                <Text style = {styles.text}>{user.email}</Text>
+               
             </View>
 
         </TouchableOpacity>

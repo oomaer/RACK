@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import ActionButtonComponent from '../components/Home/ActionButtonComponent/ActionButtonComponent';
-import { color6, colorPrimary, windowWidth } from '../utils/utils';
+import { color2, color6, colorPrimary, windowWidth } from '../utils/utils';
 
 function CustomTabNavigator({ state, descriptors, navigation }) {
   
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        backgroundColor: colorPrimary,
+        backgroundColor: color2,
         zIndex: 2,
         
     },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     circle: {
         width: 90,
         height: 90,
-        backgroundColor: colorPrimary,
+        backgroundColor: color2,
         position: 'absolute',
         bottom: -23,
         left: windowWidth * 0.5 - 45,

@@ -1,43 +1,103 @@
 
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
 import { color2, color3, color4, color6, colorPrimary, pFont500, windowWidth } from '../../../utils/utils';
 import UserDetailsCard from '../../UserDetailsCard/UserDetailsCard';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
+import PostContext from '../../../context/PostContext/PostContext';
+import UserContext from '../../../context/UserContext/UserContext';
+import { useNavigation } from '@react-navigation/native';
 
-const PostCard = ({post}) => {
+
+let lastPress = 0;
+
+const PostCard = ({post, id}) => {
+
+    const navigation = useNavigation();
     
+    const [likedBy, setLikedBy] = useState(post.likedBy);
+    const [isAlreadyLiked, setIsAlreadyLiked] = useState(false);
+
+    const {addLike, removeLike} = useContext(PostContext);
+    const {userData} = useContext(UserContext);
+
+
+    useEffect(() => {
+        likedBy.map(user => {
+            if(user.uid === userData.uid){
+                setIsAlreadyLiked(true);
+            }
+        })
+    }, [likedBy])
+
+    const onDoublePress = () => {
+        const time = new Date().getTime();
+        const delta = time - lastPress;
+
+        const DOUBLE_PRESS_DELAY = 400;
+        if (delta < DOUBLE_PRESS_DELAY) {
+            if(isAlreadyLiked){
+                removeLike(id, userData);
+                setLikedBy(likedBy.filter(user => user.uid != userData.uid));
+                setIsAlreadyLiked(false);
+            }
+            else{
+                addLike(id, userData);
+                setLikedBy([...likedBy, userData]);
+                setIsAlreadyLiked(true);
+            }
+        }
+        lastPress = time;
+    };
+
     return (
         <View style={styles.container}>
             <View style = {styles.userDetails}>
                 <UserDetailsCard user = {post.user} />
                 <Text style = {styles.postText}>{(new Date(post.createdAt.toMillis())).toJSON().slice(0,10).split`-`.join`/`}</Text>
             </View>
-            <View style={styles.imageContainer}>
+            <TouchableOpacity style={styles.imageContainer} onPress = {onDoublePress} activeOpacity = {0.9}>
                 <Image style={styles.image} source={{uri: post.image}} />
-            </View>
+            </TouchableOpacity>
             <View style = {styles.postDetails}>
                 <View style = {styles.interactions}>
                     <View style = {styles.likes}>
                         <TouchableOpacity>
-                            <Icon name="heart-o" size={26} color={color2} />
+                            {!isAlreadyLiked ? (
+                                <Icon name="heart-outline" size={26} color={color2} />
+                            )
+                            :(
+                                <Icon name="heart" size={26} color={'red'} />
+                            )
+                            }    
                         </TouchableOpacity>
-                        <View style = {styles.likedBy}>
-                            <Text style = {styles.postText}>Liked by 
-                            <Text style={styles.highlight}> someone </Text>
-                            and<Text style={styles.highlight}> 444 </Text>others
-                            </Text>
-                        </View>
+                        <TouchableOpacity onPress={() => navigation.navigate('Likes', {likedBy})} style = {styles.likedBy}>
+                            {likedBy.length > 0 &&
+                            (
+                                <Text style = {styles.postText}>Liked by 
+                                <Text style={styles.highlight}> {likedBy[0].name} </Text>
+                                
+                                {likedBy.length > 1 && (
+                                    <>
+                                    <Text style = {styles.postText}>and</Text>
+                                    <Text style={styles.highlight}> {likedBy.length - 1} </Text>
+                                    <Text style = {styles.postText}>others</Text>
+                                    </>
+                                    )
+                                }
+                                </Text>
+                            )}
+                        </TouchableOpacity>
                     </View>
                     <TouchableOpacity>
-                        <Icon name="share-alt" size={26} color={color2} />
+                        <Icon name="share-social-outline" size={22} color={color2} />
                     </TouchableOpacity>
                 </View>
                
                 <View style = {styles.postDescription}>
                     <Text style = {styles.postText}>
                         <Text style={styles.highlight}>{post.user.name} - </Text>
-                        Traldaldaldal asdjsadjsadjsds skadksd sd
+                        {post.post}
                     </Text>
                 </View>
             </View>
@@ -70,7 +130,7 @@ const styles = StyleSheet.create({
 
     image: {
         width: windowWidth,
-        height: windowWidth,
+        height: windowWidth * 1.2,
     },
 
     interactions: {

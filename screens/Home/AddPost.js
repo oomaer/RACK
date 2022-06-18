@@ -13,7 +13,7 @@ import UserContext from '../../context/UserContext/UserContext';
 
 const AddPost = ({route, navigation}) => {
   
-  const {addNewPost} = useContext(PostContext);
+  const {addNewPost, updatePosts} = useContext(PostContext);
   const {userData} = useContext(UserContext);
 
   const {image} = route.params;
@@ -43,8 +43,9 @@ const AddPost = ({route, navigation}) => {
         storageRef.getDownloadURL()
         .then(response => {
             //upload image url to database
-            addNewPost({post: postText, image: response, user: userData, createdAt: new Date(), likedBy: {}});
+            addNewPost({post: postText, image: response, user: userData, createdAt: new Date(), likedBy: []});
             setImageUploading(false);
+            updatePosts();
             navigation.navigate('Home');
         })  
         });

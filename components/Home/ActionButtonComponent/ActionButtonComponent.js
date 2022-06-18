@@ -40,8 +40,7 @@ const ActionButtonComponent = () => {
 
     const takePhoto = () => {
         ImagePicker.openCamera({
-          width: 1200,
-          height: 780,
+          
           cropping: true,
         }).then((image) => {
           // console.log(image);
