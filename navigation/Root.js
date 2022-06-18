@@ -22,15 +22,15 @@ const HomeStack = () => {
         <Stack.Navigator
         screenOptions={{
             headerStyle: { 
-                backgroundColor: 'white',
+                backgroundColor: color2,
                 elevation: 10,
                 height: 50,
                 borderBottomColor: color5,
-                borderBottomWidth: 0.8,
+                // borderBottomWidth: 0.8,
             },
           }}
         >
-          <Stack.Screen name="Profile" component={ProfileScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
+            <Stack.Screen name="Profile" component={ProfileScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
             <Stack.Screen name="Home" component={Home} options={{headerTitle: (props) => <HomeHeader {...props} /> }}/>
             <Stack.Screen name="AddPost" component={AddPost} options={{headerShown: false}}/>
             <Stack.Screen name="Likes" component={Likes} options={{headerTitle: (props) => <HomeHeader {...props} />}} />

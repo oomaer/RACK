@@ -10,7 +10,7 @@ const HomeHeader = ({navigation}) => {
         <View style = {styles.container}>
             <Text style = {styles.logo}>RACK</Text>
             <TouchableOpacity style = {styles.profile}>
-                <Icon name="user" size={24} color={color2} />
+                <Icon name="user" size={24} color={'white'} />
             </TouchableOpacity>
         </View>
     )
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     logo: {
         fontSize: 28,
         fontFamily: logoFont,
-        color: color2,
+        color: 'white',
         // fontWeight: '800',
     },
 
