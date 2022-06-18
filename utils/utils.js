@@ -4,12 +4,15 @@ export const windowWidth = Dimensions.get('window').width;
 export const windowHeight = Dimensions.get('window').height;
 
 export const primaryFont = 'Montserrat-Regular';
+export const secondaryFont = 'sans-serif';
 export const pFont500 = 'Montserrat-Medium';
 export const pFont600 = 'Montserrat-SemiBold';
 export const pFont700 = 'Montserrat-Bold';
 export const pFont800 = 'Montserrat-ExtraBold';
 
 export const logoFont = 'LobsterTwo-BoldItalic';
+
+
 
 
 export const bgColor = '#fff';
