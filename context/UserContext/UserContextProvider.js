@@ -33,7 +33,7 @@ function UserContextProvider({children}) {
 
     useEffect(() => {
         getUserData();
-        getTopUsers();
+        getTopUsers();    
     }, [])
 
 

@@ -1,13 +1,17 @@
 
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { colorPrimary, logoFont, windowWidth } from '../../utils/utils';
-
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { color2, colorPrimary, logoFont, pFont500, pFont700, pFont800, windowWidth } from '../../utils/utils';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const HomeHeader = ({navigation}) => {
     return (
         <View style = {styles.container}>
             <Text style = {styles.logo}>RACK</Text>
+            <TouchableOpacity style = {styles.profile}>
+                <Icon name="user" size={24} color={color2} />
+            </TouchableOpacity>
         </View>
     )
 }
@@ -17,15 +21,16 @@ export default HomeHeader;
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        width: '100%',
         justifyContent: 'space-between',
-        padding: windowWidth * 0.03,
+        alignItems: 'center',
     },
     
     logo: {
-        fontSize: 18,
+        fontSize: 28,
         fontFamily: logoFont,
-        color: colorPrimary,
-        fontWeight: '800',
+        color: color2,
+        // fontWeight: '800',
     },
 
 

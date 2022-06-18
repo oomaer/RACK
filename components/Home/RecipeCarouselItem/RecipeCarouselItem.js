@@ -2,9 +2,10 @@
 
 import React from 'react'; 
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { colorPrimary, windowWidth } from '../../../utils/utils';
+import { colorPrimary, windowHeight, windowWidth } from '../../../utils/utils';
 
 const RecipeCarouselItem = ({item}) => {
+    
     return(
         <View style = {styles.cardContainer}> 
             <TouchableOpacity style = {styles.card}>
@@ -32,8 +33,8 @@ const styles = StyleSheet.create({
     },
 
     cardImage: {
-        width: '100%',
-        height: 400,
+        width: windowWidth,
+        height: windowWidth * 1.2,
         borderColor: colorPrimary,
         // borderWidth: 2,
     },

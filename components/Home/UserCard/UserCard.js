@@ -3,7 +3,7 @@ import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { colorPrimary, windowWidth } from '../../../utils/utils';
 
 const UserCard = ({user}) => {
-    console.log(user);
+    
     return(
         <TouchableOpacity style = {styles.card}>
             <Image 
@@ -18,13 +18,21 @@ export default UserCard;
 
 const styles = StyleSheet.create({
 
-    cardImage: {
-        width: windowWidth * 0.18,
-        height: windowWidth * 0.18,
-        marginRight: windowWidth * 0.03, 
+    card: {
+        width: windowWidth * 0.163,
+        height: windowWidth * 0.163,
+        marginRight: windowWidth * 0.02, 
         borderRadius: 10000,
+        padding: 2,
         borderColor: colorPrimary,
         borderWidth: 2,
+       
+    },
+
+    cardImage: {
+        width: "100%",
+        height: "100%",
+        borderRadius: 10000,
     }
 
 })

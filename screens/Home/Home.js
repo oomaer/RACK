@@ -4,12 +4,14 @@ import React, {useContext, useEffect} from 'react';
 import { View, Text, StyleSheet, Button, ScrollView, LogBox} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import ActionButtonComponent from '../../components/Home/ActionButtonComponent/ActionButtonComponent';
+import PostCard from '../../components/Home/PostCard/PostCard';
 // import Carousel from 'react-native-snap-carousel';
 import RecipeCarouselItem from '../../components/Home/RecipeCarouselItem/RecipeCarouselItem';
 import UserCard from '../../components/Home/UserCard/UserCard';
+import PostContext from '../../context/PostContext/PostContext';
 
 import UserContext from '../../context/UserContext/UserContext';
-import {windowWidth, bgColor, color3, pFont500, pFont600, pFont700, color4, colorPrimary, color2 } from '../../utils/utils';
+import {windowWidth, bgColor, color5, pFont500, pFont600, pFont700, color4, colorPrimary, color2, windowHeight, primaryFont } from '../../utils/utils';
 
 
 
@@ -28,9 +30,10 @@ const data = [
 
 const Home = ({navigation}) => {
   
-
   const {topUsers} = useContext(UserContext);
+  const {wallPosts} = useContext(PostContext);
 
+  console.log(wallPosts)
 
   useEffect(() => {
       LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
@@ -43,36 +46,43 @@ const Home = ({navigation}) => {
 
       <View style = {styles.container}>
 
-          <View style = {styles.topUsers}>
             <ScrollView horizontal = {true} showsHorizontalScrollIndicator = {false}>
-              {topUsers.map((user, index) => {
-                return(
-                  <UserCard key = {index} user = {user["_data"]} />
-                )
-              })}    
-            </ScrollView>            
-          </View>
+              <View style = {styles.topUsers}>
+                {topUsers.map((user, index) => {
+                  return(
+                    <UserCard key = {index} user = {user["_data"]} />
+                  )
+                })}             
+              </View>
+          </ScrollView>   
 
-          <View style = {styles.content}>
+          {/* <View style = {styles.carousel}>
+            <Text style = {styles.header}>Browse Top Recipes this month</Text>
             <Carousel
-                width={400}
-                height={400}
+                width={windowWidth}
+                height={windowWidth * 1.2}
                 data={data}
                 renderItem={({ item }) => <RecipeCarouselItem item = {item}/>}
                 autoPlay={true}
                 autoPlayInterval={1500}
-                mode="parallax"
-                
+                mode="scale-fade-in-out"  
             />
+
+            <ActionButtonComponent  />
+          </View> */}
+
+          <View style = {styles.posts}>
+            {wallPosts.map((post, index) => {
+              return(
+                <PostCard key = {index} post = {post["_data"]} />
+              )
+            })}
           </View>
 
-          
+        
           
       </View>
       
-
-      <ActionButtonComponent />
-
     </ScrollView>
 
   );
@@ -89,63 +99,27 @@ const styles = StyleSheet.create({
   },
 
   topUsers: {
-    borderBottomWidth: 1,
-    borderBottomColor: color4,
-    
-    padding: windowWidth * 0.04,
-    height: (windowWidth * 0.18) + (windowWidth * 0.10),
-  },
-  
-  navigate: {
-    flexDirection: 'row',
-    marginBottom: 10,
-    alignItems: 'flex-end',
-  },
-  slash: {
-    fontFamily: pFont500,
-    fontSize: 24,
-    color: color3,
-  },
-  inputContainer: {
-    padding: 10,
-    marginBottom: 16,
-  },
-  label: {
-    fontSize: 16,
-    letterSpacing: 1,
-    textTransform: 'uppercase',
-    color: color3,
-    fontFamily: pFont500,
-  },
-  
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    width: '100%',
-    marginTop: 16,
-  },
-  
-  buttonContainer: {
-    width: '100%',
-    margin: 4
-  },
-
-  errorMsg: {
-    color: 'red',
-    fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
-  },
-
-  logoContainer: {
-    flexDirection: 'row',
+    borderBottomWidth: 0.8,
+    borderBottomColor: color5,
+    paddingHorizontal: windowWidth * 0.03,
     justifyContent: 'center',
     alignItems: 'center',
+    height: (windowWidth * 0.12) + (windowWidth * 0.10),
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+  
+  header: {
+    color: color2,
+    fontSize: 18,
+    fontFamily: primaryFont,
+    marginBottom: 5,
+    paddingHorizontal: windowWidth * 0.03
   },
 
-  logoImage: {
-    width: 70 * windowWidth / 100,
-    height: 70 * windowWidth / 100,
-  },
+  carousel: {
+    marginTop: 14,
+    marginBottom: 20,
+  }
 
 });

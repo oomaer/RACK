@@ -75,6 +75,28 @@
 		<string>Montserrat-Medium.ttf</string>
 		<string>Montserrat-SemiBold.ttf</string>
 		<string>GrandHotel-Regular.ttf</string>
+		<string>LobsterTwo-Bold.ttf</string>
+		<string>LobsterTwo-BoldItalic.ttf</string>
+		<string>LobsterTwo-Italic.ttf</string>
+		<string>LobsterTwo-Regular.ttf</string>
+		<string>SansitaSwashed-Black.ttf</string>
+		<string>SansitaSwashed-Bold.ttf</string>
+		<string>SansitaSwashed-ExtraBold.ttf</string>
+		<string>SansitaSwashed-Light.ttf</string>
+		<string>SansitaSwashed-Medium.ttf</string>
+		<string>SansitaSwashed-Regular.ttf</string>
+		<string>SansitaSwashed-SemiBold.ttf</string>
+		<string>lobstertworegular.ttf</string>
+		<string>Atma-Bold.ttf</string>
+		<string>Atma-Light.ttf</string>
+		<string>Atma-Medium.ttf</string>
+		<string>Atma-Regular.ttf</string>
+		<string>Atma-SemiBold.ttf</string>
+		<string>Tillana-Bold.ttf</string>
+		<string>Tillana-ExtraBold.ttf</string>
+		<string>Tillana-Medium.ttf</string>
+		<string>Tillana-Regular.ttf</string>
+		<string>Tillana-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -36,6 +36,28 @@
 		A56A4D36C8B04A4FB6A69EB5 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66C0F9A6BCCB4C0082DBCE5A /* Montserrat-Medium.ttf */; };
 		16850B93550C4AAA94164A43 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53E6C2EC43534FD99409FABD /* Montserrat-SemiBold.ttf */; };
 		C468479AF8974428A1C4207A /* GrandHotel-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C719BDA59E1E49B5A4AB3EAA /* GrandHotel-Regular.ttf */; };
+		8632C67FD36B487BBCBFA937 /* LobsterTwo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F7C94FE505374CA894F291E5 /* LobsterTwo-Bold.ttf */; };
+		736181C076104A8EA26D31E6 /* LobsterTwo-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66582C70B49A49DD915122D1 /* LobsterTwo-BoldItalic.ttf */; };
+		314E4438B9F44251BF369B3B /* LobsterTwo-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5AC28E176F4D81A15E6424 /* LobsterTwo-Italic.ttf */; };
+		1DC33CC5E095425285D5B725 /* LobsterTwo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90972837455B48BE91762BC9 /* LobsterTwo-Regular.ttf */; };
+		8C5A6B032B4C4B18A9B76289 /* SansitaSwashed-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9E47F258693046829EA42033 /* SansitaSwashed-Black.ttf */; };
+		05942F43D63D4267A75E1FC4 /* SansitaSwashed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FB520A2076D041D5BBB58F84 /* SansitaSwashed-Bold.ttf */; };
+		C3DF7DD4BD8B40F1BB2D9207 /* SansitaSwashed-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8C77386CEF845218E2527EF /* SansitaSwashed-ExtraBold.ttf */; };
+		49739AF9C5F94ED1B9F907D8 /* SansitaSwashed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D6E6DA34E64498FA6A44405 /* SansitaSwashed-Light.ttf */; };
+		87978C797DD64629BF6C2AD6 /* SansitaSwashed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22C92265066F4A4C8EAE3B92 /* SansitaSwashed-Medium.ttf */; };
+		AC71147733ED4D3B802ABECA /* SansitaSwashed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DDECD2218A3542B4B756C138 /* SansitaSwashed-Regular.ttf */; };
+		E485F8BE9E0A4AD59B76BA78 /* SansitaSwashed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9ACD6C44BBA24BD8B39900EA /* SansitaSwashed-SemiBold.ttf */; };
+		931EE61B077744399850737C /* lobstertworegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D70622D582A433BB0DEAE35 /* lobstertworegular.ttf */; };
+		21F723BBADCA47BB9DAAA8DC /* Atma-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BC979CBBD79464DA3591CFA /* Atma-Bold.ttf */; };
+		B1501B538FBE4DFFB33A1793 /* Atma-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A250D345D8C54E7CA5C69916 /* Atma-Light.ttf */; };
+		8F723B71EC0C46439D8D8757 /* Atma-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F273AF347224D4993FDEE6D /* Atma-Medium.ttf */; };
+		B199927B395F4BFE8B89E4FA /* Atma-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB294CE71DA6421092B37ADE /* Atma-Regular.ttf */; };
+		72333236DE7E4AE78D204075 /* Atma-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D08E35B009A4D5A98B8C05F /* Atma-SemiBold.ttf */; };
+		6C6B7D0792A8476BBC9FCA95 /* Tillana-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1277DBB7FF5C4A14B8950BE6 /* Tillana-Bold.ttf */; };
+		F65F480EA2614CF7BEBAF844 /* Tillana-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5972331506144FAA8BD3EFF9 /* Tillana-ExtraBold.ttf */; };
+		B78F5656B41D464298D89AF3 /* Tillana-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D56280B90F5947FE9F5E54C2 /* Tillana-Medium.ttf */; };
+		DAC53EAEDDEF434E8638F906 /* Tillana-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 365C026E1D3745F3A665A95B /* Tillana-Regular.ttf */; };
+		2EF8B9B0A7AC4B30BDEA3D8F /* Tillana-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AEB30ADD7134364B5B297F6 /* Tillana-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +110,28 @@
 		66C0F9A6BCCB4C0082DBCE5A /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; name = "Montserrat-Medium.ttf"; path = "../assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		53E6C2EC43534FD99409FABD /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; name = "Montserrat-SemiBold.ttf"; path = "../assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C719BDA59E1E49B5A4AB3EAA /* GrandHotel-Regular.ttf */ = {isa = PBXFileReference; name = "GrandHotel-Regular.ttf"; path = "../assets/fonts/GrandHotel-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F7C94FE505374CA894F291E5 /* LobsterTwo-Bold.ttf */ = {isa = PBXFileReference; name = "LobsterTwo-Bold.ttf"; path = "../assets/fonts/LobsterTwo-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		66582C70B49A49DD915122D1 /* LobsterTwo-BoldItalic.ttf */ = {isa = PBXFileReference; name = "LobsterTwo-BoldItalic.ttf"; path = "../assets/fonts/LobsterTwo-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4A5AC28E176F4D81A15E6424 /* LobsterTwo-Italic.ttf */ = {isa = PBXFileReference; name = "LobsterTwo-Italic.ttf"; path = "../assets/fonts/LobsterTwo-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		90972837455B48BE91762BC9 /* LobsterTwo-Regular.ttf */ = {isa = PBXFileReference; name = "LobsterTwo-Regular.ttf"; path = "../assets/fonts/LobsterTwo-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9E47F258693046829EA42033 /* SansitaSwashed-Black.ttf */ = {isa = PBXFileReference; name = "SansitaSwashed-Black.ttf"; path = "../assets/fonts/SansitaSwashed-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FB520A2076D041D5BBB58F84 /* SansitaSwashed-Bold.ttf */ = {isa = PBXFileReference; name = "SansitaSwashed-Bold.ttf"; path = "../assets/fonts/SansitaSwashed-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B8C77386CEF845218E2527EF /* SansitaSwashed-ExtraBold.ttf */ = {isa = PBXFileReference; name = "SansitaSwashed-ExtraBold.ttf"; path = "../assets/fonts/SansitaSwashed-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7D6E6DA34E64498FA6A44405 /* SansitaSwashed-Light.ttf */ = {isa = PBXFileReference; name = "SansitaSwashed-Light.ttf"; path = "../assets/fonts/SansitaSwashed-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		22C92265066F4A4C8EAE3B92 /* SansitaSwashed-Medium.ttf */ = {isa = PBXFileReference; name = "SansitaSwashed-Medium.ttf"; path = "../assets/fonts/SansitaSwashed-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DDECD2218A3542B4B756C138 /* SansitaSwashed-Regular.ttf */ = {isa = PBXFileReference; name = "SansitaSwashed-Regular.ttf"; path = "../assets/fonts/SansitaSwashed-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9ACD6C44BBA24BD8B39900EA /* SansitaSwashed-SemiBold.ttf */ = {isa = PBXFileReference; name = "SansitaSwashed-SemiBold.ttf"; path = "../assets/fonts/SansitaSwashed-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D70622D582A433BB0DEAE35 /* lobstertworegular.ttf */ = {isa = PBXFileReference; name = "lobstertworegular.ttf"; path = "../assets/fonts/lobstertworegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1BC979CBBD79464DA3591CFA /* Atma-Bold.ttf */ = {isa = PBXFileReference; name = "Atma-Bold.ttf"; path = "../assets/fonts/Atma-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A250D345D8C54E7CA5C69916 /* Atma-Light.ttf */ = {isa = PBXFileReference; name = "Atma-Light.ttf"; path = "../assets/fonts/Atma-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8F273AF347224D4993FDEE6D /* Atma-Medium.ttf */ = {isa = PBXFileReference; name = "Atma-Medium.ttf"; path = "../assets/fonts/Atma-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DB294CE71DA6421092B37ADE /* Atma-Regular.ttf */ = {isa = PBXFileReference; name = "Atma-Regular.ttf"; path = "../assets/fonts/Atma-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3D08E35B009A4D5A98B8C05F /* Atma-SemiBold.ttf */ = {isa = PBXFileReference; name = "Atma-SemiBold.ttf"; path = "../assets/fonts/Atma-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1277DBB7FF5C4A14B8950BE6 /* Tillana-Bold.ttf */ = {isa = PBXFileReference; name = "Tillana-Bold.ttf"; path = "../assets/fonts/Tillana-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5972331506144FAA8BD3EFF9 /* Tillana-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Tillana-ExtraBold.ttf"; path = "../assets/fonts/Tillana-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D56280B90F5947FE9F5E54C2 /* Tillana-Medium.ttf */ = {isa = PBXFileReference; name = "Tillana-Medium.ttf"; path = "../assets/fonts/Tillana-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		365C026E1D3745F3A665A95B /* Tillana-Regular.ttf */ = {isa = PBXFileReference; name = "Tillana-Regular.ttf"; path = "../assets/fonts/Tillana-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6AEB30ADD7134364B5B297F6 /* Tillana-SemiBold.ttf */ = {isa = PBXFileReference; name = "Tillana-SemiBold.ttf"; path = "../assets/fonts/Tillana-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +262,28 @@
 				66C0F9A6BCCB4C0082DBCE5A /* Montserrat-Medium.ttf */,
 				53E6C2EC43534FD99409FABD /* Montserrat-SemiBold.ttf */,
 				C719BDA59E1E49B5A4AB3EAA /* GrandHotel-Regular.ttf */,
+				F7C94FE505374CA894F291E5 /* LobsterTwo-Bold.ttf */,
+				66582C70B49A49DD915122D1 /* LobsterTwo-BoldItalic.ttf */,
+				4A5AC28E176F4D81A15E6424 /* LobsterTwo-Italic.ttf */,
+				90972837455B48BE91762BC9 /* LobsterTwo-Regular.ttf */,
+				9E47F258693046829EA42033 /* SansitaSwashed-Black.ttf */,
+				FB520A2076D041D5BBB58F84 /* SansitaSwashed-Bold.ttf */,
+				B8C77386CEF845218E2527EF /* SansitaSwashed-ExtraBold.ttf */,
+				7D6E6DA34E64498FA6A44405 /* SansitaSwashed-Light.ttf */,
+				22C92265066F4A4C8EAE3B92 /* SansitaSwashed-Medium.ttf */,
+				DDECD2218A3542B4B756C138 /* SansitaSwashed-Regular.ttf */,
+				9ACD6C44BBA24BD8B39900EA /* SansitaSwashed-SemiBold.ttf */,
+				2D70622D582A433BB0DEAE35 /* lobstertworegular.ttf */,
+				1BC979CBBD79464DA3591CFA /* Atma-Bold.ttf */,
+				A250D345D8C54E7CA5C69916 /* Atma-Light.ttf */,
+				8F273AF347224D4993FDEE6D /* Atma-Medium.ttf */,
+				DB294CE71DA6421092B37ADE /* Atma-Regular.ttf */,
+				3D08E35B009A4D5A98B8C05F /* Atma-SemiBold.ttf */,
+				1277DBB7FF5C4A14B8950BE6 /* Tillana-Bold.ttf */,
+				5972331506144FAA8BD3EFF9 /* Tillana-ExtraBold.ttf */,
+				D56280B90F5947FE9F5E54C2 /* Tillana-Medium.ttf */,
+				365C026E1D3745F3A665A95B /* Tillana-Regular.ttf */,
+				6AEB30ADD7134364B5B297F6 /* Tillana-SemiBold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -341,6 +407,28 @@
 				A56A4D36C8B04A4FB6A69EB5 /* Montserrat-Medium.ttf in Resources */,
 				16850B93550C4AAA94164A43 /* Montserrat-SemiBold.ttf in Resources */,
 				C468479AF8974428A1C4207A /* GrandHotel-Regular.ttf in Resources */,
+				8632C67FD36B487BBCBFA937 /* LobsterTwo-Bold.ttf in Resources */,
+				736181C076104A8EA26D31E6 /* LobsterTwo-BoldItalic.ttf in Resources */,
+				314E4438B9F44251BF369B3B /* LobsterTwo-Italic.ttf in Resources */,
+				1DC33CC5E095425285D5B725 /* LobsterTwo-Regular.ttf in Resources */,
+				8C5A6B032B4C4B18A9B76289 /* SansitaSwashed-Black.ttf in Resources */,
+				05942F43D63D4267A75E1FC4 /* SansitaSwashed-Bold.ttf in Resources */,
+				C3DF7DD4BD8B40F1BB2D9207 /* SansitaSwashed-ExtraBold.ttf in Resources */,
+				49739AF9C5F94ED1B9F907D8 /* SansitaSwashed-Light.ttf in Resources */,
+				87978C797DD64629BF6C2AD6 /* SansitaSwashed-Medium.ttf in Resources */,
+				AC71147733ED4D3B802ABECA /* SansitaSwashed-Regular.ttf in Resources */,
+				E485F8BE9E0A4AD59B76BA78 /* SansitaSwashed-SemiBold.ttf in Resources */,
+				931EE61B077744399850737C /* lobstertworegular.ttf in Resources */,
+				21F723BBADCA47BB9DAAA8DC /* Atma-Bold.ttf in Resources */,
+				B1501B538FBE4DFFB33A1793 /* Atma-Light.ttf in Resources */,
+				8F723B71EC0C46439D8D8757 /* Atma-Medium.ttf in Resources */,
+				B199927B395F4BFE8B89E4FA /* Atma-Regular.ttf in Resources */,
+				72333236DE7E4AE78D204075 /* Atma-SemiBold.ttf in Resources */,
+				6C6B7D0792A8476BBC9FCA95 /* Tillana-Bold.ttf in Resources */,
+				F65F480EA2614CF7BEBAF844 /* Tillana-ExtraBold.ttf in Resources */,
+				B78F5656B41D464298D89AF3 /* Tillana-Medium.ttf in Resources */,
+				DAC53EAEDDEF434E8638F906 /* Tillana-Regular.ttf in Resources */,
+				2EF8B9B0A7AC4B30BDEA3D8F /* Tillana-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,10 +12,12 @@ function AuthContextProvider({children}) {
     const [errorMsg, setErrorMsg] = useState('');
 
     const createNewUser = async (user) => {
+        
         firestore()
         .collection('Users')
         .doc(user.id)
         .set({
+            uid: user.id,
             name: user.name,
             email: user.email,
             imageUrl: null,
@@ -28,8 +30,10 @@ function AuthContextProvider({children}) {
     }
 
     const register = async (user) => {
+        
         auth().createUserWithEmailAndPassword(user.email, user.password)
         .then(response => {
+            console.log(response)
             setErrorMsg('');
             AsyncStorage.setItem('firstTime', 'true');
             createNewUser({...user, id: response.user.uid})

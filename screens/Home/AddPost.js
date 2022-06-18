@@ -1,72 +1,66 @@
 
 
-import React, {useState, useEffect, useContext} from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Button} from 'react-native';
-import FormButton from '../../../components/FormButton/FormButton';
-import {windowWidth, bgColor, pFont500, color2, defaultImageURL } from '../../../utils/utils';
-import ImagePicker from 'react-native-image-crop-picker';
+import React, {useState, useContext} from 'react';
+import { View, Text, StyleSheet, Image, TextInput} from 'react-native';
+import FormButton from '../../components/FormButton/FormButton';
+import {windowWidth, bgColor, pFont500, color2, color4 } from '../../utils/utils';
 import storage from '@react-native-firebase/storage';
-import UserContext from '../../../context/UserContext/UserContext';
-import LoadingSpinner from '../../../components/LoadingSpinner/LoadingSpinner';
-import NavigationButton from '../../../components/NavigationButton/NavigationButton';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import PostContext from '../../context/PostContext/PostContext';
+import UserContext from '../../context/UserContext/UserContext';
 
-const UploadPhoto = ({}) => {
+
+
+const AddPost = ({route, navigation}) => {
   
-  const {updateUserImage} = useContext(UserContext);
+  const {addNewPost} = useContext(PostContext);
+  const {userData} = useContext(UserContext);
 
-  const [image, setImage] = useState();
+  const {image} = route.params;
   const [imageUploading, setImageUploading] = useState(false);
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
-  const uploadImage = () => {
-    ImagePicker.openPicker({
-      width: 400,
-      height: 400,
-      cropping: true,
-      cropperCircleOverlay: true,
-    })
-    .then(image => {
-      setImage(image.path);
-    })
-    .catch(err => {
-      console.log(err)
-    });
-  }
+  const [postText, setPostText] = useState('');
+  const [error, setError] = useState(false);
 
 
-  const onSubmitPress = () => {
-    
-    if(image !== undefined){
+  const onPostPress = () => {
 
-      let filename = image.split('/').pop();
-      const storageRef = storage().ref(filename);
-      setImageUploading(true);
+    if(postText.length > 0){
+        let filename = image.split('/').pop();
+        const storageRef = storage().ref(filename);
+        setImageUploading(true);
 
-      const task = storageRef.putFile(image);
-      task.on('state_changed', taskSnapshot => {
+        //upload to firebase storage
+        const task = storageRef.putFile(image);
+        task.on('state_changed', taskSnapshot => {
         setUploadPercentage(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100);
-      });
-      
-      //when the image is uploaded
-      task.then(() => {
+        });
+        
+        //when the image is uploaded
+
+        task.then(() => {
         storageRef.getDownloadURL()
         .then(response => {
-          updateUserImage(response);
-          setImageUploading(false);
-          
+            //upload image url to database
+            addNewPost({post: postText, image: response, user: userData, createdAt: new Date(), likedBy: {}});
+            setImageUploading(false);
+            navigation.navigate('Home');
         })  
-      });
-
-      
+        });
     }
     else{
-      updateUserImage(defaultImageURL);
+        setError(true);
     }
+
   }
 
-  const onSkipPress = () => {
-    updateUserImage(defaultImageURL);
+
+  const onInputTextChange = (text) => {
+    setPostText(text);
+    setError(false);
   }
+
 
   return (
 
@@ -74,11 +68,11 @@ const UploadPhoto = ({}) => {
       
       <Image
           style={styles.bgImageTop}
-          source={require('../../../assets/images/bgImages/bg_top.png')}
+          source={require('../../assets/images/bgImages/bg_top.png')}
         />
       <Image
         style={styles.bgImageBottom}
-        source={require('../../../assets/images/bgImages/bg_bottom.png')}
+        source={require('../../assets/images/bgImages/bg_bottom.png')}
       />
 
       <View style = {styles.content}>
@@ -86,20 +80,16 @@ const UploadPhoto = ({}) => {
         <View>
           <Text style={styles.header}>Set your Profile Photo</Text>
         </View>
-        <TouchableOpacity style = {styles.logoContainer} onPress = {uploadImage}>
-          {image !== undefined ? (  
+        <View style = {styles.logoContainer}>
             <Image
-              style={styles.logoImage}
-              source={{uri: image}}
-            />
-          ):(
-            <Image
-              style={styles.logoImage}
-              source={require('../../../assets/images/defaultuserimage.png')}
-            />
-          )}
-          
-        </TouchableOpacity>
+                style={styles.logoImage}
+                source={{uri: image}}
+            />      
+        </View>
+
+        <View>
+            <TextInput style = {StyleSheet.compose(styles.textInput, error && styles.textInputError)} value = {postText} onChangeText = {onInputTextChange} placeholder = 'Whats on your Mind?' />
+        </View>
 
         {imageUploading ? (
           <View style = {styles.imageUploading}>
@@ -111,15 +101,10 @@ const UploadPhoto = ({}) => {
         ):(
           <View style = {styles.buttonsContainer}>
             <View style = {styles.buttonContainer}>
-              <FormButton title = 'Submit' onPress={onSubmitPress} />
+              <FormButton title = 'Post' onPress={onPostPress} contained={false}/>
             </View>
           </View>
         )}
-
-        <View style = {styles.bottomRow}>
-          <NavigationButton title='SKIP' onPress = {onSkipPress} active = {false}/>
-        </View>
-        
 
       </View>
 
@@ -128,7 +113,7 @@ const UploadPhoto = ({}) => {
   );
 }
 
-export default UploadPhoto;
+export default AddPost;
 
 
 
@@ -144,7 +129,7 @@ const styles = StyleSheet.create({
     width: 90 * windowWidth / 100,
     padding: 6 * windowWidth / 100,
     backgroundColor: 'white',
-    elevation: 5,
+    elevation: 8,
     borderRadius: 8,
   },  
 
@@ -178,8 +163,22 @@ const styles = StyleSheet.create({
     width: 70 * windowWidth / 100,
     height: 70 * windowWidth / 100,
     backgroundColor: 'white',
+    borderRadius: 8,
   },
 
+  textInput: {
+    fontSize: 16,
+    color: color4,
+    fontFamily: pFont500,
+    letterSpacing: 1,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+
+  textInputError: {
+    borderColor: 'red',
+    borderBottomWidth: 1,
+  },
 
   imageUploading: {
     alignItems: 'center',
