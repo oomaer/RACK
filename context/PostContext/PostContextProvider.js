@@ -71,6 +71,7 @@ function PostContextProvider({children}) {
     const getUserPosts = async (user) => {
         return await firestore()
         .collection('Posts')
+        .orderBy('createdAt', 'desc')
         .where('user.uid', '==', user.uid)
         .get()
         

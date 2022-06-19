@@ -1,4 +1,5 @@
 
+import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react"
 import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Image } from "react-native"
 import { useSafeAreaFrame } from "react-native-safe-area-context";
@@ -17,6 +18,7 @@ const ProfileScreen = ({route}) => {
     const [userPosts, setUserPosts] = useState([]);
 
     const {user} = route.params;
+    const navigation = useNavigation();
 
     const {getUserPosts} = useContext(PostContext);
 
@@ -75,10 +77,12 @@ const ProfileScreen = ({route}) => {
                 <View style = {styles.userPosts}>
                     {userPosts && userPosts.map((post, index) => {
                             if((index + 1) % 3 == 0){
-                                return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {false} />
+                                return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {false} 
+                                    onPress = {() => navigation('UserPost', {post: post._data, id: post.id})} />
                             }
                             else{
-                                return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {true} />
+                                return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {true} 
+                                    onPress = {() => navigation('UserPost', {post: post._data, id: post.id})} />
                             }
                     })}
                 </View>

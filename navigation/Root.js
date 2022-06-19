@@ -13,6 +13,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import CustomTabNavigator from './CustomTabNavigator';
 import Likes from '../screens/Home/Likes';
 import ProfileScreen from '../screens/User/ProfileSreen/ProfileScreen';
+import UserPostScreen from '../screens/User/UserPostScreen/UserPostScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,7 @@ const HomeStack = () => {
             <Stack.Screen name="AddPost" component={AddPost} options={{headerShown: false}}/>
             <Stack.Screen name="Likes" component={Likes} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
             <Stack.Screen name="Profile" component={ProfileScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
+            <Stack.Screen name="UserPost" component={UserPostScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
             
         </Stack.Navigator>
     )

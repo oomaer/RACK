@@ -96,7 +96,7 @@ const AddPost = ({route, navigation}) => {
           <View style = {styles.imageUploading}>
             <LoadingSpinner />
             <View>
-                <Text style={styles.uploadText}>Uploading {uploadPercentage} %</Text>
+                <Text style={styles.uploadText}>Uploading {uploadPercentage.toString().split('.')[0]} %</Text>
             </View>
           </View>
         ):(
