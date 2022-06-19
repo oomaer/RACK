@@ -12,6 +12,14 @@ function UserContextProvider({children}) {
     const [topUsers, setTopUsers] = useState([]);
     const [userDataLoading, setUserDataLoading] = useState(true);
 
+
+    const updateUserName = async (name) => {
+        return await firestore()
+        .collection('Users')
+        .doc(user.uid)
+        .update({name: name})
+    }
+
     const getUserData = () => {
         setUserDataLoading(true);
     
@@ -31,10 +39,76 @@ function UserContextProvider({children}) {
         .catch(err => console.log(err));
     }
 
+
+    const updateUserInPosts = (userData) => {
+
+        //updating user data in posts
+        firestore()
+        .collection('Posts')
+        .where('user.uid', '==', user.uid)
+        .get()
+        .then(posts => {
+            posts.docs.forEach(post => {
+                
+                firestore()
+                .collection('Posts')
+                .doc(post.id)
+                .update({user: userData})
+                .then(() => console.log('User updated in posts'))
+                .catch(err => console.log(err));
+
+            })
+        })
+        .catch(err => console.log(err));
+
+        //updating user data in post likes
+        firestore()
+        .collection('Posts')
+        .get()
+        .then(posts => {
+            posts.docs.forEach(post => {
+                
+                let likedBy = post._data.likedBy;
+                for(let i = 0; i < likedBy.length; i++){
+                    if(likedBy[i].uid === user.uid){
+                        likedBy[i] = userData;
+                    }
+                }
+                
+                firestore()
+                .collection('Posts')
+                .doc(post.id)
+                .update({likedBy: likedBy})
+                .then(() => console.log('User updated in post likes'))
+                .catch(err => console.log(err));
+
+            })
+        })
+    
+    }
+
+
+
     useEffect(() => {
         getUserData();
-        getTopUsers();    
-    }, [])
+        getTopUsers();   
+        
+        const subscriber = firestore()
+        .collection('Users')
+        .doc(user.uid)
+        .onSnapshot(documentSnapshot => {
+            console.log(documentSnapshot.exists)
+          if(documentSnapshot.metadata._metadata[0] === false){
+    
+            updateUserInPosts(documentSnapshot.data());
+          }
+          
+        });
+        // Stop listening for updates when no longer required
+        return () => subscriber();
+
+
+    }, [user.uid])
 
 
     const updateUserImage = (newImageUrl) => {
@@ -53,6 +127,17 @@ function UserContextProvider({children}) {
 
     }
 
+    const changeUserImage = async (newImageUrl) => {
+        
+        return await firestore()
+        .collection('Users')
+        .doc(user.uid)
+        .update({
+            imageUrl: newImageUrl
+        })
+
+    }
+
 
     return (
         <UserContext.Provider
@@ -62,6 +147,8 @@ function UserContextProvider({children}) {
                 updateUserImage,
                 userDataLoading,
                 topUsers,
+                updateUserName,
+                changeUserImage,
             }}
         >
             {children}

@@ -1,7 +1,7 @@
 
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react"
-import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Image, TextInput } from "react-native"
+import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Image, TextInput, Alert } from "react-native"
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import UploadsButton from "../../../components/Profile/UploadsButton";
 import UserPost from "../../../components/Profile/UserPost";
@@ -20,27 +20,24 @@ const ProfileScreen = ({route}) => {
     const [userPosts, setUserPosts] = useState([]);
     const [editing, setEditing] = useState(false);
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-
     const {user} = route.params;
     const navigation = useNavigation();
     const isFocused = useIsFocused();
 
-    const {userData} = useContext(UserContext);
+    const {userData, updateUserName} = useContext(UserContext);
     const {getUserPosts} = useContext(PostContext);
 
     
     
     useEffect(() => {
-        setEditing(true);
+        setEditing(false);
         setName(user.name)
-        setEmail(user.email)
-        // fetch(`https://api.unsplash.com/photos/random?orientation=landscape&query=food&client_id=${accesskey}`)
-        // .then(response => response.json()
-        // .then(res => {
-        //     res.urls && setCoverImage(res.urls.regular);
-        // }))
-        // .catch(err => console.log(err));
+        fetch(`https://api.unsplash.com/photos/random?orientation=landscape&query=food&client_id=${accesskey}`)
+        .then(response => response.json()
+        .then(res => {
+            res.urls && setCoverImage(res.urls.regular);
+        }))
+        .catch(err => console.log(err));
         if(isFocused){
             getUserPosts(user)
             .then(response => {
@@ -52,10 +49,24 @@ const ProfileScreen = ({route}) => {
     }, [isFocused, user])
 
     const onConfirmClick = () => {
-        console.log('update user');
-        setEditing(false);
+        updateUserName(name)
+        .then(() => setEditing(false))
+        .catch(err => console.log(err))
     }
 
+    const onDeleteClick = () => {
+        Alert.alert(
+            "Confirm Delete",
+            "Are you sure you want to delete your account?",
+            [
+              {
+                text: "Cancel",
+                style: "cancel"
+              },
+              { text: "Confirm", onPress: () => console.log("OK Pressed") }
+            ]
+          );
+    }
 
     return(
         <ScrollView style = {{backgroundColor: bgColor}}>
@@ -72,26 +83,38 @@ const ProfileScreen = ({route}) => {
                 <View style = {styles.userDetails}>
                     <View style = {styles.justifyBetween}>
                         <View style={styles.row}>
-                            <View style = {styles.userImageContainer}>
-                                <Image
-                                    style = {styles.userImage}
-                                    source = {{uri: user.imageUrl}}
-                                />
-                            </View>
+                            {!editing ? (
+                                <View style = {styles.userImageContainer}>
+                                    <Image
+                                        style = {styles.userImage}
+                                        source = {{uri: user.imageUrl}}
+                                    />
+                                </View>
+                            ) : (
+                                <TouchableOpacity style = {styles.userImageContainer} onPress = {() => navigation.navigate('UpdatePhoto', {user})}>
+                                    <Image
+                                        style = {styles.userImage}
+                                        source = {{uri: user.imageUrl}}
+                                    />
+                                </TouchableOpacity>
+                            )}
                             <View style = {styles.userDescription}>
                                 {editing ? (
                                     <>
                                     <TextInput value = {name} style = {styles.userNameInput} onChangeText = {setName}/>
-                                    <TextInput value = {email} style = {styles.userTextInput} onChangeText = {setEmail}/>
+                                    <Text style = {styles.userText}>{user.email}</Text>
+                                    <TouchableOpacity style={{flexDirection:'row', alignItems: 'center'}} onPress={onDeleteClick}>
+                                        <Icon name = 'ios-trash-bin-outline' size={24} color = {'red'} />
+                                        <Text style = {styles.deleteText}>Delete</Text>
+                                    </TouchableOpacity>
                                     </>
                                 ):(
                                     <>
-                                    <Text style = {styles.userName}>{user.name}</Text>
+                                    <Text style = {styles.userName}>{name}</Text>
                                     <Text style = {styles.userText}>{user.email}</Text>
                                     </>
-                                )}
-                                
-                            </View>
+                                )}                               
+                            </View>                           
                         </View>
                         {userData.uid === user.uid && 
                             !editing ? (
@@ -99,13 +122,16 @@ const ProfileScreen = ({route}) => {
                                 <Icon name = 'pencil' size={24} color = {color2} />
                             </TouchableOpacity>
                             ):(
+                            <>
                             <TouchableOpacity onPress={onConfirmClick}>
                                 <Icon name = 'md-checkmark-sharp' size={24} color = {color2} />
                             </TouchableOpacity>
+                            </>
                             )
                         }
                     </View>
                 </View>
+  
 
                 <View style = {styles.userUploadsButtons}>
                     <UploadsButton title='Posts' iconName = 'grid-outline' />
@@ -226,5 +252,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: 'center',
+    },
+    deleteText: {
+        color: 'red',
+        fontFamily: primaryFont,
+        marginLeft: 5,
+        fontSize: 18,
     }
 })
