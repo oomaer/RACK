@@ -28,7 +28,6 @@ const ProfileScreen = ({route}) => {
     const {getUserPosts} = useContext(PostContext);
 
     
-    
     useEffect(() => {
         setEditing(false);
         setName(user.name)
