@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
 import { color2, color3, color4, color5, color6, colorPrimary, pFont500, secondaryFont, windowWidth } from '../../../utils/utils';
-import UserDetailsCard from '../../UserDetailsCard/UserDetailsCard';
+import UserDetailsCard from '../../../components/UserDetailsCard/UserDetailsCard';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PostContext from '../../../context/PostContext/PostContext';
 import UserContext from '../../../context/UserContext/UserContext';
@@ -22,7 +22,7 @@ const UserPostScreen = ({route}) => {
     const [likedBy, setLikedBy] = useState(post.likedBy);
     const [isAlreadyLiked, setIsAlreadyLiked] = useState(false);
 
-    const {addLike, removeLike} = useContext(PostContext);
+    const {addLike, removeLike, deletePost} = useContext(PostContext);
     const {userData} = useContext(UserContext);
 
 
@@ -68,11 +68,27 @@ const UserPostScreen = ({route}) => {
         });
     }
 
+    const onDeletePress = () => {
+        deletePost(id)
+        .then(response => {
+            console.log('Post Deleted')
+            navigation.goBack();
+        })
+        .catch(err => console.log(err));
+    }
+
     return (
         <View style={styles.container}>
             <View style = {styles.userDetails}>
                 <UserDetailsCard user = {post.user} />
-                <Text style = {styles.postText}>{(new Date(post.createdAt.toMillis())).toJSON().slice(0,10).split`-`.join`/`}</Text>
+                <View style = {styles.row}>
+                    <Text style = {styles.dateText}>{(new Date(post.createdAt.toMillis())).toJSON().slice(0,10).split`-`.join`/`}</Text>
+                    {post.user.uid === userData.uid && 
+                        <TouchableOpacity onPress={onDeletePress}>
+                            <Icon name="trash" size={24} color={color2} />
+                        </TouchableOpacity>
+                    }
+                </View>
             </View>
             <TouchableOpacity style={styles.imageContainer} onPress = {onDoublePress} activeOpacity = {0.9}>
                 <Image style={styles.image} source={{uri: post.image}} />
@@ -133,7 +149,7 @@ export default UserPostScreen;
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 20,
+        marginVertical: 20,
     },
 
     postDetails: {
@@ -206,6 +222,16 @@ const styles = StyleSheet.create({
     postText: {
         color: color6,
         fontFamily: secondaryFont,
+    },
+    dateText: {
+        color: color6,
+        fontFamily: secondaryFont,
+        marginRight: 5,
+    },
+
+    row:{
+        flexDirection: 'row',
+        alignItems: 'center',
     }
 
 })

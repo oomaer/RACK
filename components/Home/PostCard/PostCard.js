@@ -24,13 +24,18 @@ const PostCard = ({post, id}) => {
     const {userData} = useContext(UserContext);
 
 
+
     useEffect(() => {
-        likedBy.map(user => {
+
+        setIsAlreadyLiked(false);
+        setLikedBy(post.likedBy)
+        post.likedBy.map(user => {
             if(user.uid === userData.uid){
                 setIsAlreadyLiked(true);
             }
         })
-    }, [likedBy])
+        
+    }, [post])
 
     const onDoublePress = () => {
         const time = new Date().getTime();

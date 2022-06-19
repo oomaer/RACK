@@ -5,12 +5,11 @@ import { pFont500, color2, primaryFont, color5, color6, windowWidth } from '../.
 
 
 const UserPost = ({post, id, marginRight, onPress}) => {
-    console.log(post);
 
     return (
         <TouchableOpacity activeOpacity = {0.7}
             style={marginRight ? {marginRight: windowWidth * 0.01, marginBottom: windowWidth * 0.01} : { marginBottom: windowWidth * 0.01}} 
-            onClick = {onPress}>
+            onPress = {onPress}>
             <Image 
                 style = {styles.postImage}
                 source = {{uri: post.image}}

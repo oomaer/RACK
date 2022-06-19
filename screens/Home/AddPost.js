@@ -45,7 +45,6 @@ const AddPost = ({route, navigation}) => {
             //upload image url to database
             addNewPost({post: postText, image: response, user: userData, createdAt: new Date(), likedBy: []});
             setImageUploading(false);
-            updatePosts();
             navigation.navigate('Home');
         })  
         });

@@ -1,5 +1,5 @@
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react"
 import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Image } from "react-native"
 import { useSafeAreaFrame } from "react-native-safe-area-context";
@@ -19,6 +19,7 @@ const ProfileScreen = ({route}) => {
 
     const {user} = route.params;
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
 
     const {getUserPosts} = useContext(PostContext);
 
@@ -31,14 +32,15 @@ const ProfileScreen = ({route}) => {
         //     res.urls && setCoverImage(res.urls.regular);
         // }))
         // .catch(err => console.log(err));
+        if(isFocused){
+            getUserPosts(user)
+            .then(response => {
+                setUserPosts(response.docs);
+            })
+            .catch(err => console.log(err));
+        }
 
-        getUserPosts(user)
-        .then(response => {
-            setUserPosts(response.docs);
-        })
-        .catch(err => console.log(err));
-
-    }, [])
+    }, [isFocused])
 
 
     return(
@@ -78,11 +80,11 @@ const ProfileScreen = ({route}) => {
                     {userPosts && userPosts.map((post, index) => {
                             if((index + 1) % 3 == 0){
                                 return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {false} 
-                                    onPress = {() => navigation('UserPost', {post: post._data, id: post.id})} />
+                                    onPress = {() => navigation.navigate('UserPost', {post: post._data, id: post.id})} />
                             }
                             else{
                                 return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {true} 
-                                    onPress = {() => navigation('UserPost', {post: post._data, id: post.id})} />
+                                    onPress = {() => navigation.navigate('UserPost', {post: post._data, id: post.id})} />
                             }
                     })}
                 </View>

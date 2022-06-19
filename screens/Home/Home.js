@@ -1,5 +1,6 @@
 
 
+import { useIsFocused } from '@react-navigation/native';
 import React, {useContext, useEffect} from 'react';
 import { View, Text, StyleSheet, Button, ScrollView, LogBox} from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
@@ -15,27 +16,20 @@ import {windowWidth, bgColor, color5, pFont500, pFont600, pFont700, color4, colo
 
 
 
-const data = [
-  {
-    id: 1,
-    text: 'Hello, world!',
-    imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=745&q=80',
-  },
-  {
-    id: 2,
-    text: 'Hello, world!',
-    imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-  }
-]
-
 const Home = ({navigation}) => {
   
   const {topUsers} = useContext(UserContext);
-  const {wallPosts} = useContext(PostContext);
+  const {wallPosts, getWallPosts} = useContext(PostContext);
+
+  const isFocused = useIsFocused();
 
   useEffect(() => {
       LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
-  }, [])
+      if(isFocused){
+        getWallPosts();
+      }
+
+  }, [isFocused])
 
 
   return (
@@ -72,7 +66,7 @@ const Home = ({navigation}) => {
           <View style = {styles.posts}>
             {wallPosts.map((post, index) => {
               return(
-                <PostCard key = {index} post = {post["_data"]} id = {post.id}/>
+                <PostCard key = {post.id} post = {post["_data"]} id = {post.id}/>
               )
             })}
           </View>

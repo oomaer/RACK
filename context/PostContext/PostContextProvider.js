@@ -71,10 +71,17 @@ function PostContextProvider({children}) {
     const getUserPosts = async (user) => {
         return await firestore()
         .collection('Posts')
-        .orderBy('createdAt', 'desc')
+        // .orderBy('createdAt', 'desc')
         .where('user.uid', '==', user.uid)
         .get()
         
+    }
+
+    const deletePost = async (id) => {
+        return await firestore()
+        .collection('Posts')
+        .doc(id)
+        .delete()
     }
 
     useEffect(() => {
@@ -87,9 +94,11 @@ function PostContextProvider({children}) {
                 addNewPost,
                 wallPosts,
                 updatePosts,
+                getWallPosts,
                 addLike,
                 removeLike,
                 getUserPosts,
+                deletePost,
             }}
         >
             {children}
