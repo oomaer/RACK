@@ -5,6 +5,7 @@ import { useSafeAreaFrame } from "react-native-safe-area-context";
 import UploadsButton from "../../../components/Profile/UploadsButton";
 import UserPost from "../../../components/Profile/UserPost";
 import UserDetailsCard from "../../../components/UserDetailsCard/UserDetailsCard";
+import PostContext from "../../../context/PostContext/PostContext";
 import UserContext from "../../../context/UserContext/UserContext";
 import { bgColor, color2, colorPrimary, pFont500, color3, primaryFont, windowHeight, windowWidth } from "../../../utils/utils";
 
@@ -13,17 +14,30 @@ const secretkey = 'WmwvXC83PG0P-znpsEIRWBf2Krc9n_d9tObkVh-sy7o'
 
 const ProfileScreen = ({route}) => {
     const [coverImage, setCoverImage] = useState('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    const [userPosts, setUserPosts] = useState([]);
 
     const {user} = route.params;
+
+    const {getUserPosts} = useContext(PostContext);
+
     
-    // useEffect(() => {
-    //     fetch(`https://api.unsplash.com/photos/random?orientation=landscape&query=food&client_id=${accesskey}`)
-    //     .then(response => response.json()
-    //     .then(res => {
-    //         res.urls && setCoverImage(res.urls.regular);
-    //     }))
-    //     .catch(err => console.log(err));
-    // }, [])
+    
+    useEffect(() => {
+        // fetch(`https://api.unsplash.com/photos/random?orientation=landscape&query=food&client_id=${accesskey}`)
+        // .then(response => response.json()
+        // .then(res => {
+        //     res.urls && setCoverImage(res.urls.regular);
+        // }))
+        // .catch(err => console.log(err));
+
+        getUserPosts(user)
+        .then(response => {
+            setUserPosts(response.docs);
+        })
+        .catch(err => console.log(err));
+
+    }, [])
+
 
     return(
         <ScrollView style = {{backgroundColor: bgColor}}>
@@ -59,22 +73,14 @@ const ProfileScreen = ({route}) => {
                 </View>
 
                 <View style = {styles.userPosts}>
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost marginRight = {true} post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-                    <UserPost post = {{imageUrl: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}} />
-
+                    {userPosts && userPosts.map((post, index) => {
+                            if((index + 1) % 3 == 0){
+                                return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {false} />
+                            }
+                            else{
+                                return <UserPost key = {index} post = {post._data} id = {post.id} marginRight = {true} />
+                            }
+                    })}
                 </View>
 
             </View>
@@ -147,7 +153,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
         padding: windowWidth * 0.01,
     }
 })

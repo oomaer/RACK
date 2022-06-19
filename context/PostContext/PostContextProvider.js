@@ -67,6 +67,15 @@ function PostContextProvider({children}) {
         .catch(err => console.log(err));
     }
 
+
+    const getUserPosts = async (user) => {
+        return await firestore()
+        .collection('Posts')
+        .where('user.uid', '==', user.uid)
+        .get()
+        
+    }
+
     useEffect(() => {
         getWallPosts();    
     }, [])
@@ -79,6 +88,7 @@ function PostContextProvider({children}) {
                 updatePosts,
                 addLike,
                 removeLike,
+                getUserPosts,
             }}
         >
             {children}
