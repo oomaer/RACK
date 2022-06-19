@@ -71,6 +71,19 @@ const PostCard = ({post, id}) => {
         });
     }
 
+    const onLikePress = () => {
+        if(isAlreadyLiked){
+            removeLike(id, userData);
+            setLikedBy(likedBy.filter(user => user.uid != userData.uid));
+            setIsAlreadyLiked(false);
+        }
+        else{
+            addLike(id, userData);
+            setLikedBy([...likedBy, userData]);
+            setIsAlreadyLiked(true);
+        }
+    }
+
     return (
         <View style={styles.container}>
             <View style = {styles.userDetails}>
@@ -83,7 +96,7 @@ const PostCard = ({post, id}) => {
             
             <View style = {styles.interactions}>
             
-                <TouchableOpacity style = {styles.likebutton}>
+                <TouchableOpacity style = {styles.likebutton} onPress = {onLikePress}>
                     {!isAlreadyLiked ? (
                         <Icon name="heart-outline" size={26} color={color2} />
                     )

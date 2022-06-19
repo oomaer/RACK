@@ -25,11 +25,11 @@ const HomeStack = () => {
         <Stack.Navigator
         screenOptions={{
             headerStyle: { 
-                backgroundColor: color2,
+                backgroundColor: 'white',
                 elevation: 10,
                 height: 50,
                 borderBottomColor: color5,
-                // borderBottomWidth: 0.8,
+                borderBottomWidth: 0.8,
             },
           }}
         >

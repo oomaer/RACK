@@ -14,7 +14,7 @@ const HomeHeader = ({}) => {
                                                 auth()
                                                 .signOut()
                                                 .then(() => console.log('User signed out!'))}}>
-                <Icon name="ios-exit-outline" size={24} color={'white'} />
+                <Icon name="ios-exit-outline" size={24} color={color2} />
             </TouchableOpacity>
         </View>
     )
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     logo: {
         fontSize: 28,
         fontFamily: logoFont,
-        color: 'white',
+        color: color2,
         // fontWeight: '800',
     },
 

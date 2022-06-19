@@ -16,7 +16,7 @@ const accesskey = 'kgwUYdGajnAIum03RowqvVo-ZD2kxUMvshlEKXq3sTA'
 const secretkey = 'WmwvXC83PG0P-znpsEIRWBf2Krc9n_d9tObkVh-sy7o'
 
 const ProfileScreen = ({route}) => {
-    const [coverImage, setCoverImage] = useState('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+    const [coverImage, setCoverImage] = useState('https://images.unsplash.com/photo-1558689509-900d3d3cc727?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80');
     const [userPosts, setUserPosts] = useState([]);
     const [editing, setEditing] = useState(false);
     const [name, setName] = useState('');
@@ -24,19 +24,19 @@ const ProfileScreen = ({route}) => {
     const navigation = useNavigation();
     const isFocused = useIsFocused();
 
-    const {userData, updateUserName} = useContext(UserContext);
+    const {userData, updateUserName, deleteUser} = useContext(UserContext);
     const {getUserPosts} = useContext(PostContext);
 
     
     useEffect(() => {
         setEditing(false);
         setName(user.name)
-        fetch(`https://api.unsplash.com/photos/random?orientation=landscape&query=food&client_id=${accesskey}`)
-        .then(response => response.json()
-        .then(res => {
-            res.urls && setCoverImage(res.urls.regular);
-        }))
-        .catch(err => console.log(err));
+        // fetch(`https://api.unsplash.com/photos/random?orientation=landscape&query=food&client_id=${accesskey}`)
+        // .then(response => response.json()
+        // .then(res => {
+        //     res.urls && setCoverImage(res.urls.regular);
+        // }))
+        // .catch(err => console.log(err));
         if(isFocused){
             getUserPosts(user)
             .then(response => {
@@ -62,7 +62,7 @@ const ProfileScreen = ({route}) => {
                 text: "Cancel",
                 style: "cancel"
               },
-              { text: "Confirm", onPress: () => console.log("OK Pressed") }
+              { text: "Confirm", onPress: () => deleteUser() }
             ]
           );
     }
@@ -95,6 +95,9 @@ const ProfileScreen = ({route}) => {
                                         style = {styles.userImage}
                                         source = {{uri: user.imageUrl}}
                                     />
+                                    <View style = {styles.cameraIcon}>
+                                        <Icon name = "camera" size = {40} color = {'white'} />
+                                    </View>
                                 </TouchableOpacity>
                             )}
                             <View style = {styles.userDescription}>
@@ -115,16 +118,17 @@ const ProfileScreen = ({route}) => {
                                 )}                               
                             </View>                           
                         </View>
-                        {userData.uid === user.uid && 
-                            !editing ? (
+                        {userData.uid === user.uid && !editing ? (
                             <TouchableOpacity onPress={() => setEditing(true)}>
                                 <Icon name = 'pencil' size={24} color = {color2} />
                             </TouchableOpacity>
                             ):(
                             <>
+                            {userData.uid === user.uid &&
                             <TouchableOpacity onPress={onConfirmClick}>
                                 <Icon name = 'md-checkmark-sharp' size={24} color = {color2} />
                             </TouchableOpacity>
+                            }
                             </>
                             )
                         }
@@ -177,8 +181,20 @@ const styles = StyleSheet.create({
         bottom: 0,
         left: 0,
         backgroundColor: color2,
-        opacity: 0.3,
+        opacity: 0.2,
         zIndex: 1,
+    },
+
+    cameraIcon: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        backgroundColor: colorPrimary,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10000,
     },
 
     userDetails: {

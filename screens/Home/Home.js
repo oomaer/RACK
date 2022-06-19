@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: (windowWidth * 0.12) + (windowWidth * 0.10),
     flexDirection: 'row',
-    marginBottom: 5,
+    marginBottom: 16,
   },
   
   header: {
