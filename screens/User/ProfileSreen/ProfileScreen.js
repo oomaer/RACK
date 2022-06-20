@@ -1,7 +1,7 @@
 
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import React, { useContext, useEffect, useState } from "react"
-import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Image, TextInput, Alert } from "react-native"
+import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Image, TextInput, Alert, Modal } from "react-native"
 import { useSafeAreaFrame } from "react-native-safe-area-context";
 import UploadsButton from "../../../components/Profile/UploadsButton";
 import UserPost from "../../../components/Profile/UserPost";
@@ -10,6 +10,7 @@ import PostContext from "../../../context/PostContext/PostContext";
 import UserContext from "../../../context/UserContext/UserContext";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { bgColor, color2, colorPrimary, pFont500, color3, primaryFont, windowHeight, windowWidth, color5, color6 } from "../../../utils/utils";
+import ConfirmModal from "./ConfirmModal";
 
 
 const accesskey = 'kgwUYdGajnAIum03RowqvVo-ZD2kxUMvshlEKXq3sTA'
@@ -20,11 +21,13 @@ const ProfileScreen = ({route}) => {
     const [userPosts, setUserPosts] = useState([]);
     const [editing, setEditing] = useState(false);
     const [name, setName] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+
     const {user} = route.params;
     const navigation = useNavigation();
     const isFocused = useIsFocused();
 
-    const {userData, updateUserName, deleteUser} = useContext(UserContext);
+    const {userData, updateUserName} = useContext(UserContext);
     const {getUserPosts} = useContext(PostContext);
 
     
@@ -54,17 +57,7 @@ const ProfileScreen = ({route}) => {
     }
 
     const onDeleteClick = () => {
-        Alert.alert(
-            "Confirm Delete",
-            "Are you sure you want to delete your account?",
-            [
-              {
-                text: "Cancel",
-                style: "cancel"
-              },
-              { text: "Confirm", onPress: () => deleteUser() }
-            ]
-          );
+        setModalVisible(true);
     }
 
     return(
@@ -152,6 +145,9 @@ const ProfileScreen = ({route}) => {
                             }
                     })}
                 </View>
+
+
+                <ConfirmModal modalVisible = {modalVisible} setModalVisible={setModalVisible}/>
 
             </View>
         </ScrollView>

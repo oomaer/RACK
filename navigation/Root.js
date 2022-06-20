@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import UserContext from '../context/UserContext/UserContext';
 
 import Home from '../screens/Home/Home';
 import HomeHeader from '../components/HomeHeader/HomeHeader';
@@ -17,10 +17,14 @@ import UserPostScreen from '../screens/User/UserPostScreen/UserPostScreen';
 import UploadPhoto from '../screens/Auth/UploadPhoto/UploadPhoto';
 import UpdatePhoto from '../screens/User/UpdatePhoto/UpdatePhoto';
 
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const HomeStack = () => {
+
+    
+
     return(
         <Stack.Navigator
         screenOptions={{
@@ -37,11 +41,32 @@ const HomeStack = () => {
             <Stack.Screen name="AddPost" component={AddPost} options={{headerShown: false}}/>
             <Stack.Screen name="Likes" component={Likes} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
             <Stack.Screen name="Profile" component={ProfileScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
-            <Stack.Screen name="UserPost" component={UserPostScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
-            <Stack.Screen name="UpdatePhoto" component={UpdatePhoto} options={{headerShown: false}} />
-            
+
         </Stack.Navigator>
     )
+}
+
+const ProfileStack = () => {
+  const {userData} = useContext(UserContext);
+  return(
+      <Stack.Navigator
+      screenOptions={{
+          headerStyle: { 
+              backgroundColor: 'white',
+              elevation: 10,
+              height: 50,
+              borderBottomColor: color5,
+              borderBottomWidth: 0.8,
+          },
+        }}
+      >
+  
+          <Stack.Screen name="CurrentUserProfile" component={ProfileScreen} initialParams={{user: userData}} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
+          <Stack.Screen name="UserPost" component={UserPostScreen} options={{headerTitle: (props) => <HomeHeader {...props} />}} />
+          <Stack.Screen name="UpdatePhoto" component={UpdatePhoto} options={{headerShown: false}} />
+          
+      </Stack.Navigator>
+  )
 }
 
 const Root = () => {
@@ -78,11 +103,11 @@ const Root = () => {
                     }}
             />
 
-            <Tab.Screen name="Settings" component={HomeStack} 
+            <Tab.Screen name="ProfileStack" component={ProfileStack} 
                       options={{
                         tabBarIcon: ({focused}) => (
                           <Icon
-                            name={focused ? "home" : "home-outline"}
+                            name={focused ? "person" : "person-outline"}
                             size={30}
                             color={'white'}
                           />

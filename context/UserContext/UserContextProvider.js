@@ -4,6 +4,7 @@ import UserContext from "./UserContext";
 import firestore from '@react-native-firebase/firestore';
 import AuthContext from "../AuthContext/AuthContext";
 import auth from '@react-native-firebase/auth';
+import { firebase } from "@react-native-firebase/firestore";
 
 
 function UserContextProvider({children}) {
@@ -140,29 +141,32 @@ function UserContextProvider({children}) {
 
     }
 
-    const deleteUserPosts = async () => {
+    const deleteUserPosts = async (promiseArr) => {
         return await firestore()
         .collection('Posts')
         .where('user.uid', '==', user.uid)
         .get()
         .then(posts => {
             posts.docs.forEach(post => {
-                firestore()
-                .collection('Posts')
-                .doc(post.id)
-                .delete()
-                .then(() => console.log('User posts deleted!'))
-                .catch(err => console.log(err));
+                promiseArr.push(
+                    firestore()
+                    .collection('Posts')
+                    .doc(post.id)
+                    .delete()
+                    // .then(() => console.log('User posts deleted!'))
+                    // .catch(err => console.log(err))
+                )
             })
         })
         .catch(err => console.log(err))
     }
 
-    const deleteUserLikes = async () => {
-        return await firestore()
+    const deleteUserLikes = async (promiseArr) => {
+        firestore()
         .collection('Posts')
         .get()
         .then(posts => {
+
             posts.docs.forEach(post => {
                 let likedBy = post._data.likedBy;
                 for(let i = 0; i < likedBy.length; i++){
@@ -171,13 +175,15 @@ function UserContextProvider({children}) {
                     }
                 }
             
-                firestore()
-                .collection('Posts')
-                .doc(post.id)
-                .update({likedBy: likedBy})
-                .then(() => console.log('User likes deleted!'))
-                .catch(err => console.log(err));
+                promiseArr.push(
+                    firestore()
+                    .collection('Posts')
+                    .doc(post.id)
+                    .update({likedBy: likedBy})
+                )
+                
             })
+            
         })
         .catch(err => console.log(err))
     }
@@ -190,19 +196,20 @@ function UserContextProvider({children}) {
     }
 
     const deleteUser = async () => {
-        // setUserDataLoading(true)
+        setUserDataLoading(true)
 
-        deleteUserPosts()
-        deleteUserLikes()
-        deleteUserData().then(() => {
-            auth().signOut();
-            console.log('User deleted!');
-        })
-        // user.delete()
-        // .then(() => {'user deleted'})
-        // .catch(err=>console.log(err))
+        let promiseArr = []
+        deleteUserPosts(promiseArr)
+        deleteUserLikes(promiseArr)
+        promiseArr.push(deleteUserData())
 
-    
+        Promise.all(promiseArr).then(() => {
+            user.delete().then(() => {
+                console.log('user Deleted');
+            });
+
+        }).catch(err => console.log(err))
+
     }
 
 
